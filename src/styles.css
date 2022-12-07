@@ -25,6 +25,16 @@ a {
       color: inherit;
 }
 
+form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+}
+
+table {
+      width: 100%;
+}
+
 input, button,
 textarea {
       font-family: inherit;
@@ -52,7 +62,7 @@ button {
 /******************* customize chrome scrollbar ********************/
 
 ::-webkit-scrollbar {
-      width: 0.5em;
+      width: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -128,4 +138,53 @@ i-feather > svg {
 .swal2-styled.swal2-cancel {
       color: currentColor !important;
       background-color: #e7ecef !important;
+}
+
+/******************* material button ********************/
+
+.mat-raised-button:not([class*="mat-elevation-z"]), 
+.mat-raised-button:not(.mat-button-disabled):active:not([class*="mat-elevation-z"]),
+.mat-fab:not([class*="mat-elevation-z"]), 
+.mat-fab:not(.mat-button-disabled):active:not([class*="mat-elevation-z"]),
+.mat-mini-fab:not([class*="mat-elevation-z"]), 
+.mat-mini-fab:not(.mat-button-disabled):active:not([class*="mat-elevation-z"]) {
+      box-shadow: none;
+}
+
+.mat-flat-button, .mat-stroked-button, 
+.mat-raised-button, .mat-button, .mat-icon-button,
+.mat-fab, .mat-mini-fab {
+      font-size: 0.9rem;
+      font-weight: 500;
+      line-height: normal !important;
+}
+
+.mat-flat-button, .mat-stroked-button, 
+.mat-raised-button, .mat-button {
+      min-width: unset !important;
+      padding: 0.8em 1.2em !important;
+      border-radius: 0.5em !important;
+      background-color: transparent;
+}
+
+.mat-button.mat-primary, .mat-icon-button.mat-primary,
+.mat-stroked-button.mat-primary {
+      color: #33444d;
+}
+
+.mat-flat-button.mat-primary, .mat-raised-button.mat-primary, 
+.mat-fab.mat-primary, .mat-mini-fab.mat-primary {
+      background-color: #182125;
+      color: #fff;
+}
+
+.mat-button-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+}
+
+.mat-flat-button i-feather, .mat-stroked-button i-feather, 
+.mat-raised-button i-feather, .mat-button i-feather {
+      margin-right: 0.5em;
 }
