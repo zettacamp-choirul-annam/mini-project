@@ -1,0 +1,16 @@
+<div class="container">
+      <div class="media">
+            <img class="media-image" src="https://images.unsplash.com/photo-1577303935007-0d306ee638cf" alt="image">
+      </div>
+      <div class="content">
+            <div class="content-head">
+                  <button class="content-back" (click)="goBack()">
+                        <i-feather name="chevron-left"></i-feather>
+                        <span>back</span>
+                  </button>
+            </div>
+            <div class="content-body">
+                  <router-outlet></router-outlet>
+            </div>
+      </div>
+</div>

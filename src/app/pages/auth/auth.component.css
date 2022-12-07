@@ -1,0 +1,53 @@
+.container {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      overflow: hidden;
+}
+
+.media {
+      width: 65%;
+      height: 100%;
+}
+
+.media-image {
+      width: 100%;
+      height: 100%;
+      filter: brightness(80%);
+      object-fit: cover;
+}
+
+.content {
+      width: 35%;
+      height: 100%;
+      padding: 40px 60px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden auto;
+}
+
+.content-head {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+}
+
+.content-body {
+      width: 100%;
+      flex: 1;
+      padding-top: 3em;
+}
+
+.content-back {
+      display: flex;
+      align-items: center;
+}
+
+.content-back span {
+      font-size: 0.85em;
+}
+
+.content-back i-feather {
+      margin-right: 0.4em;
+}
