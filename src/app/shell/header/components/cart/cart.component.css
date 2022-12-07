@@ -1,0 +1,22 @@
+:host {
+      line-height: 0;
+}
+
+.cart {
+      position: relative;
+}
+
+.cart-icon {
+      stroke-width: 1.5;
+}
+
+.cart-badge {
+      position: absolute;
+      top: -1.2em; left: 1.2em;
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: #fff;
+      padding: 0.8em 0.5em;
+      border-radius: 50px;
+      background-color: #ff0037;
+}

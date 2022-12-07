@@ -1,0 +1,23 @@
+<div class="profile">
+      <img class="profile-avatar" [matMenuTriggerFor]="menu" src="https://mini-project-annam.vercel.app/assets/images/background-2.jpg" alt="avatar">
+
+      <mat-menu #menu="matMenu">
+            <div class="profile-info">
+                  <div class="profile-name">
+                        <!-- {{ user.first_name }} {{ user.last_name }} -->
+                        Choirul Annam
+                  </div>
+                  <div class="profile-email">
+                        <!-- {{ user.email }} -->
+                        mcanam910@gmail.com
+                  </div>
+                  <div class="profile-credit">
+                        <i-feather name="credit-card"></i-feather> 
+                        <span>{{ 100000 | currency:'Rp ' }}</span>
+                  </div>
+            </div>
+            <button mat-menu-item>
+                  <i-feather name="log-out"></i-feather> Logout
+            </button>
+      </mat-menu>
+</div>

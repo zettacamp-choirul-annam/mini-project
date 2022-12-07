@@ -8,10 +8,15 @@ import { GraphQLModule } from './graphql.module';
 import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
+import { ShellComponent } from './shell/shell.component';
+
+import { HeaderModule } from './shell/header/header.module';
+import { FooterModule } from './shell/footer/footer.module';
 
 @NgModule({
       declarations: [
-            AppComponent
+            AppComponent,
+            ShellComponent
       ],
       imports: [
             BrowserModule,
@@ -19,7 +24,9 @@ import { AppComponent } from './app.component';
             HttpClientModule,
             AppRoutingModule,
             GraphQLModule,
-            SharedModule
+            SharedModule,
+            HeaderModule,
+            FooterModule
       ],
       providers: [],
       bootstrap: [AppComponent]

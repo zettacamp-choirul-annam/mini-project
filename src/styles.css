@@ -132,7 +132,7 @@ i-feather > svg {
 }
 
 .swal2-styled.swal2-confirm {
-      background-color: #182125 !important;
+      background-color: #202c31 !important;
 }
 
 .swal2-styled.swal2-cancel {
@@ -174,7 +174,7 @@ i-feather > svg {
 
 .mat-flat-button.mat-primary, .mat-raised-button.mat-primary, 
 .mat-fab.mat-primary, .mat-mini-fab.mat-primary {
-      background-color: #182125;
+      background-color: #202c31;
       color: #fff;
 }
 
@@ -187,4 +187,36 @@ i-feather > svg {
 .mat-flat-button i-feather, .mat-stroked-button i-feather, 
 .mat-raised-button i-feather, .mat-button i-feather {
       margin-right: 0.5em;
+}
+
+/******************* material menu ********************/
+
+.mat-menu-content:not(:empty) {
+      padding: 0 !important;
+}
+
+.mat-menu-panel {
+      border-radius: 20px !important;
+      box-shadow: 0 10px 50px rgba(119, 140, 202, 0.2);
+}
+
+.mat-menu-item {
+      line-height: normal !important;
+      height: fit-content !important;
+      color: inherit !important;
+      padding: 1em 1.4em !important;
+      display: flex !important;
+      align-items: center;
+}
+
+.mat-menu-item i-feather {
+      margin-right: 0.5em;
+}
+
+.mat-menu-content .mat-menu-item:first-child {
+      padding-top: 1.4em !important;
+}
+
+.mat-menu-content .mat-menu-item:last-child {
+      padding-bottom: 1.4em !important;
 }

@@ -1,0 +1,45 @@
+:host {
+      line-height: 0;
+}
+
+.profile-avatar {
+      width: 30px;
+      height: 30px;
+      object-fit: cover;
+      border-radius: 50%;
+      cursor: pointer;
+}
+
+.profile-info {
+      padding: 1.4em;
+      border-bottom: 1px solid #e0e7eb;
+}
+
+.profile-name {
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+}
+
+.profile-email {
+      font-size: 0.9rem;
+      color: #85a0ad;
+}
+
+.profile-credit {
+      color: #11c580;
+      padding: 1em;
+      margin-top: 1.4em;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      background-color: rgba(17, 197, 128, 0.1);
+}
+
+.profile-credit span {
+      font-weight: 500;
+      font-size: 0.85rem;
+}
+
+.profile-credit i-feather {
+      margin-right: 0.5em;
+}
