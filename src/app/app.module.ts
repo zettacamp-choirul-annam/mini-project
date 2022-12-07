@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { GraphQLModule } from './graphql.module';
+import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
 
@@ -18,6 +19,7 @@ import { AppComponent } from './app.component';
             HttpClientModule,
             AppRoutingModule,
             GraphQLModule,
+            SharedModule
       ],
       providers: [],
       bootstrap: [AppComponent]
