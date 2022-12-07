@@ -1,4 +1,131 @@
-/* You can add global styles to this file, and also import other style files */
+/******************* reset default css styles *******************/
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+*,
+*::before,
+*::after {
+      font-family: 'Poppins', sans-serif !important;
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+}
+
+html {
+      font-size: 16px;
+      color: #33444d;
+}
+
+body {
+      width: 100%;
+      min-height: 100vh;
+      background-color: #fcfefd;
+}
+
+a {
+      text-decoration: none;
+      color: inherit;
+}
+
+input, button,
+textarea {
+      font-family: inherit;
+      font-size: inherit;
+      color: inherit;
+      border: none;
+      outline: none;
+      background-color: transparent;
+}
+
+button {
+      user-select: none;
+      cursor: pointer;
+}
+
+/******************* customize default input placeholder ********************/
+
+::placeholder {
+      font-family: inherit !important;
+      font-size: inherit !important;
+      color: inherit !important;
+      opacity: 0.3;
+}
+
+/******************* customize chrome scrollbar ********************/
+
+::-webkit-scrollbar {
+      width: 0.5em;
+}
+
+::-webkit-scrollbar-track {
+      background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.2);
+      border-radius: 50px;
+}
+
+/******************* feather icons ********************/
+
+i-feather {
+      width: fit-content !important;
+      height: fit-content !important;
+      line-height: 0;
+}
+
+i-feather > svg {
+      width: 1.4em;
+      height: auto;
+      stroke-width: 1.6;
+}
+
+/******************* customize sweetalert ********************/
+
+.swal2-container.swal2-backdrop-show, 
+.swal2-container.swal2-noanimation {
+      background-color: rgba(20, 27, 31, 0.8) !important;
+}
+
+.swal2-popup {
+      color: inherit !important;
+      width: unset !important;
+      min-width: 400px !important;
+      padding: 30px !important;
+      border-radius: 20px !important;
+}
+
+.swal2-icon {
+      margin: 0 auto !important;
+}
+
+.swal2-title {
+      font-size: 1.6rem !important;
+      padding: 0 !important;
+      margin: 20px 0 10px 0 !important;
+}
+
+.swal2-html-container {
+      color: #526d7a !important;
+      margin: 0 0 10px 0 !important;
+      font-size: 1rem !important;
+}
+
+.swal2-styled {
+      font-size: 0.9rem !important;
+      font-weight: 500 !important;
+      padding: 0.6em 1.2em !important;
+      border-radius: 0.5em !important;
+      box-shadow: none !important;
+}
+
+.swal2-styled:hover {
+      background-image: none !important;
+}
+
+.swal2-styled.swal2-confirm {
+      background-color: #182125 !important;
+}
+
+.swal2-styled.swal2-cancel {
+      color: currentColor !important;
+      background-color: #e7ecef !important;
+}
