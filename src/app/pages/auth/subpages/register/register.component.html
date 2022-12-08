@@ -2,36 +2,45 @@
       <h2 class="heading">Register</h2>
       <h3 class="subheading">Please register to continue.</h3>
 
-      <form class="form">
+      <form class="form" [formGroup]="form">
             <mat-form-field class="form-field" floatLabel="always">
                   <mat-label>first name</mat-label>
-                  <input matInput type="text">
+                  <input matInput type="text" formControlName="first_name">
+                  <mat-error *ngIf="firstNameControl?.touched && firstNameControl?.errors?.['required']">first name is required!</mat-error>
             </mat-form-field>
-
+      
             <mat-form-field class="form-field" floatLabel="always">
                   <mat-label>last name</mat-label>
-                  <input matInput type="text">
+                  <input matInput type="text" formControlName="last_name">
+                  <mat-error *ngIf="lastNameControl?.touched && lastNameControl?.errors?.['required']">last name is required!</mat-error>
             </mat-form-field>
-
+      
             <mat-form-field class="form-field" floatLabel="always">
                   <mat-label>email</mat-label>
-                  <input matInput type="email">
+                  <input matInput type="email" formControlName="email">
+                  <mat-error *ngIf="emailControl?.touched && emailControl?.errors?.['email']">invalid email address!</mat-error>
+                  <mat-error *ngIf="emailControl?.touched && emailControl?.errors?.['required']">email is required!</mat-error>
             </mat-form-field>
 
             <mat-form-field class="form-field" floatLabel="always">
                   <mat-label>what is your pet's name?</mat-label>
-                  <input matInput type="text">
+                  <input matInput type="text" formControlName="security_answer">
+                  <mat-error *ngIf="answerControl?.touched && answerControl?.errors?.['required']">answer is required!</mat-error>
             </mat-form-field>
-
+      
             <mat-form-field class="form-field" floatLabel="always">
                   <mat-label>password</mat-label>
-                  <input matInput type="password">
-                  <button mat-icon-button type="button" matSuffix>
-                        <i-feather name="eye"></i-feather>
+                  <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+                  <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+                        <i-feather [name]="hidePassword ? 'eye' : 'eye-off'"></i-feather>
                   </button>
+                  <mat-error *ngIf="passwordControl?.touched && passwordControl?.errors?.['required']">password is required!</mat-error>
             </mat-form-field>
 
-            <button class="form-submit" mat-flat-button color="primary">Register</button>
+            <button class="form-submit" type="submit" mat-flat-button color="primary" (click)="onSubmit()" [disabled]="inProgress">
+                  <app-spinbar *ngIf="inProgress"></app-spinbar>
+                  <span *ngIf="!inProgress">Register</span>
+            </button>
       </form>
 
       <div class="redirect-link">

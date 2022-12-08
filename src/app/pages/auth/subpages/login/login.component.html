@@ -2,23 +2,29 @@
       <h2 class="heading">Login</h2>
       <h3 class="subheading">Please login to continue.</h3>
 
-      <form class="form">
+      <form class="form" [formGroup]="form">
             <mat-form-field class="form-field" floatLabel="always">
                   <mat-label>email</mat-label>
-                  <input matInput type="email">
+                  <input matInput type="email" formControlName="email">
+                  <mat-error *ngIf="emailControl?.touched && emailControl?.errors?.['email']">invalid email address!</mat-error>
+                  <mat-error *ngIf="emailControl?.touched && emailControl?.errors?.['required']">email is required!</mat-error>
             </mat-form-field>
-
-            <mat-form-field class="form-field" floatLabel="always">
+      
+            <mat-form-field class="form-field" floatLabel="always" class="password-field">
                   <mat-label>password</mat-label>
-                  <input matInput type="password">
-                  <button mat-icon-button type="button" matSuffix>
-                        <i-feather name="eye"></i-feather>
+                  <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+                  <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+                        <i-feather [name]="hidePassword ? 'eye' : 'eye-off'"></i-feather>
                   </button>
-            </mat-form-field>
+                  <mat-error *ngIf="passwordControl?.touched && passwordControl?.errors?.['required']">password is required!</mat-error>
+            </mat-form-field>      
 
             <a class="reset-link" routerLink="/auth/reset-password">Forgot your password?</a>
 
-            <button class="form-submit" mat-flat-button color="primary">Login</button>
+            <button class="form-submit" type="submit" mat-flat-button color="primary" (click)="onSubmit()" [disabled]="inProgress">
+                  <app-spinbar *ngIf="inProgress"></app-spinbar>
+                  <span *ngIf="!inProgress">Login</span>
+            </button>
       </form>
 
       <div class="redirect-link">
