@@ -1,10 +1,10 @@
 <header class="header">
       <h1 class="header-title">BEEF!</h1>
       
-      <app-nav></app-nav>
-      <app-cart></app-cart>
-      <app-profile></app-profile>
+      <app-nav [user]="user"></app-nav>
+      <app-cart *ngIf="user?.role == 'USER'"></app-cart>
+      <app-profile *ngIf="user" [user]="user" (_logout)="onLogout()"></app-profile>
       
-      <a mat-flat-button routerLink="/auth/register">Register</a>
-      <a mat-flat-button color="primary" routerLink="/auth/login">Login</a>
+      <a mat-flat-button routerLink="/auth/register" *ngIf="!user">Register</a>
+      <a mat-flat-button color="primary" routerLink="/auth/login" *ngIf="!user">Login</a>
 </header>
