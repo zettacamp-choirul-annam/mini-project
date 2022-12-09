@@ -1,0 +1,18 @@
+.rate {
+      line-height: 0;
+      display: flex;
+      gap: 5px;
+      align-items: center;
+}
+
+.rate-icon::ng-deep svg {
+      color: var(--text-color-3);
+      width: 1.2em;
+      height: auto;
+      cursor: pointer;
+}
+
+.rate-icon.active::ng-deep {
+      fill: rgb(255, 174, 0);
+      stroke: rgb(255, 174, 0) !important;
+}

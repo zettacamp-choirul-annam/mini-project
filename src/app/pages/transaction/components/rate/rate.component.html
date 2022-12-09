@@ -1,0 +1,5 @@
+<div class="rate">
+      <div class="rate-star" *ngFor="let i of [1, 2, 3, 4, 5]" (click)="updateValue(i)">
+            <i-feather class="rate-icon" [ngClass]="{ active: value >= i }" name="star"></i-feather>
+      </div>
+</div>

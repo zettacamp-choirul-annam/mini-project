@@ -1,0 +1,27 @@
+<div class="card">
+      <div class="card-head">
+            <div class="card-user" *ngIf="role == 'ADMIN'">
+                  <img src="../../../../../assets/images/background.jpg" alt="" class="card-user-picture">
+                  <div class="card-user-name">{{ user.first_name + ' ' + user.last_name }}</div>
+            </div>
+            <!-- <div class="card-status" [ngClass]="{ success: isSuccess }">{{ status }}</div> -->
+            <div class="card-date">{{ transaction.order_date }}</div>
+            <button mat-flat-button color="primary" class="card-rate" *ngIf="role != 'ADMIN'" [disabled]="isRated" (click)="openDialog()">Rate order</button>
+      </div>
+      <div class="card-body">
+            <div class="card-menu" *ngFor="let menu of menus">
+                  <img [src]="menu.picture" alt="" class="card-menu-picture">
+                  <div class="card-menu-info">
+                        <div class="card-menu-name">{{ menu.name }}</div>
+                        <div class="card-menu-price">{{ menu.amount }} x {{ menu.price | currency:'Rp ' }}</div>
+                  </div>
+                  <div class="card-menu-total">{{ menu.price * menu.amount | currency:'Rp ' }}</div>
+            </div>
+      </div>
+      <div class="card-foot">
+            <div class="card-total">
+                  <span>Total:</span>
+                  <span>{{ transaction.total_price | currency:'Rp ' }}</span>
+            </div>
+      </div>
+</div>

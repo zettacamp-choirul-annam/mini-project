@@ -1,0 +1,10 @@
+<div class="menu">
+      <div class="menu-head">
+            <img [src]="menu.picture" alt="" class="menu-picture">
+            <div class="menu-name">{{ menu.name }}</div>
+            <app-rate (_change)="onrRateStarChange($event)"></app-rate>
+      </div>
+      <div class="menu-body" [ngClass]="{ expand: isRated }">
+            <textarea class="menu-review" #review (input)="onRateReviewChange(review.value)" placeholder="write your review..."></textarea>
+      </div>
+</div>

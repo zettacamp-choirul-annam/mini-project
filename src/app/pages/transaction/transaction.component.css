@@ -1,0 +1,91 @@
+.container {
+      width: 100%;
+      min-height: 100vh;
+      padding: 100px;
+}
+
+.toolbar {
+      width: 100%;
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+}
+
+.tab {
+      display: flex;
+      gap: 20px;
+}
+
+.tab-item {
+      padding: 0.8em 1.2em;
+      border-radius: 10px;
+      border: 1px solid hsl(200, 20%, 95%);
+      cursor: pointer;
+      transition: 0.2s;
+}
+
+.tab-item.active {
+      background-color: hsl(200, 20%, 95%);
+}
+
+.rating-container {
+
+}
+
+.rating {
+      width: 100%;
+      padding: 30px;
+      margin-bottom: 30px;
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(119, 140, 202, 0.15);
+}
+
+.menu {
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+}
+
+.menu-picture {
+      width: 80px;
+      height: auto;
+      margin-right: 20px;
+      object-fit: contain;
+}
+
+.menu-name {
+      font-size: 1.2rem;
+      font-weight: 500;
+}
+
+.rating-info {
+      display: flex;
+      align-items: center;
+      line-height: 0;
+      margin-bottom: 30px;
+}
+
+.rating-star {
+      margin-right: 10px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+}
+
+.rating-star i-feather::ng-deep svg {
+      width: 1em;
+      color: #e0e7eb;
+      fill: currentColor;
+      stroke: currentColor;
+}
+
+.rating-star i-feather.active::ng-deep svg {
+      color: #ff7b00;
+}
+
+.rating-date {
+      font-size: 0.8rem;
+      opacity: 0.75;
+}

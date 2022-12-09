@@ -1,0 +1,45 @@
+.menu {
+      width: 100%;
+      margin-bottom: 20px;
+}
+
+.menu-head {
+      width: 100%;
+      display: flex;
+      align-items: center;
+}
+
+.menu-picture {
+      width: 60px;
+      object-fit: contain;
+      margin-right: 30px;
+}
+
+.menu-name {
+      margin-right: auto;
+}
+
+.menu-body {
+      width: 100%;
+      max-height: 0;
+      overflow: hidden;
+      transition: 0.5s;
+}
+
+.menu-body.expand {
+      max-height: 300px;
+}
+
+.menu-review {
+      font-family: inherit;
+      font-size: inherit;
+      color: inherit;
+      width: 100%;
+      padding: 15px;
+      margin-top: 20px;
+      border: 1px solid hsl(200, 20%, 90%);
+      border-radius: 10px;
+      outline: none;
+      background-color: transparent;
+      resize: none;
+}
