@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { CartService } from 'src/app/shared/services/cart.service';
 
 @Component({
       selector: 'app-cart',
@@ -6,7 +8,20 @@ import { Component, OnInit } from '@angular/core';
       styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-      constructor() { }
+      sub!: Subscription;
+      total: number = 0;
 
-      ngOnInit(): void { }
+      constructor(
+            private cartService: CartService
+      ) { }
+
+      ngOnInit(): void {
+            this.sub = this.cartService.total$.subscribe(total => {
+                  this.total = total;
+            });
+      }
+
+      ngOnDestroy() {
+            this.sub.unsubscribe();
+      }
 }
