@@ -1,0 +1,55 @@
+<div class="mat-dialog-head">
+      <h1 class="mat-dialog-title">Order Menu</h1>
+      <button mat-button mat-dialog-close>cancel</button>
+</div>
+
+<div class="mat-dialog-body" mat-dialog-content>
+      <div class="menu">
+            <img class="menu-picture" [src]="menu.picture" alt="picture">
+            <div class="menu-name">{{ menu.name }}</div>
+
+            <div class="menu-info">
+                  <div class="menu-rating">{{ menu.avg_rating }} <i-feather name="star"></i-feather></div>
+                  <div class="menu-price">
+                        <span *ngIf="isDiscount">{{ menu.price_after_discount | currency:'Rp ':'symbol':'3.0' }}</span>
+                        <sup  *ngIf="isDiscount">{{ menu.price | currency:'Rp ':'symbol':'3.0' }}</sup>
+                        <span *ngIf="!isDiscount">{{ menu.price | currency:'Rp ':'symbol':'3.0' }}</span>
+                  </div>
+            </div>
+
+            <div class="menu-description">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos eum velit laborum eius suscipit 
+                  ad unde enim autem nihil sint temporibus sunt, at vero vitae earum rem, eos, impedit dolor!
+            </div>
+
+            <div class="menu-title">Ingredients</div>
+
+            <ul class="menu-ingredient">
+                  <li class="menu-ingredient-item">Bawang</li>
+                  <li class="menu-ingredient-item">Tahu</li>
+            </ul>
+
+            <div class="menu-title">Reviews</div>
+
+            <div class="menu-review">
+                  <div class="menu-review-item" *ngFor="let rating of ratings">
+                        <div class="menu-review-profile">
+                              <img class="menu-review-profile-picture" src="https://mini-project-annam.vercel.app/assets/images/background-2.jpg" alt="">
+                              <div class="menu-review-profile-name">{{ rating.user_id.first_name + ' ' + rating.user_id.last_name }}</div>
+                        </div>
+                        <div class="menu-review-info">
+                              <div class="menu-review-star">
+                                    <i-feather name="star" *ngFor="let i of [1, 2, 3, 4, 5]" [ngClass]="{ active: rating.rating_value >= i }"></i-feather>
+                              </div>
+                              <div class="menu-review-date">{{ rating.rating_date }}</div>
+                        </div>
+                        <div class="menu-review-message">{{ rating.review }}</div>
+                  </div>
+            </div>
+      </div>
+</div>
+
+<div class="mat-dialog-foot" mat-dialog-actions align="end">
+      <app-quantity-input class="menu-quantity" [min]="1" [max]="menu.availableStock" #quantity></app-quantity-input>
+      <button mat-flat-button color="primary" cdkFocusInitial (click)="addToCart(quantity.value, menu._id)">Add to cart</button>
+</div>

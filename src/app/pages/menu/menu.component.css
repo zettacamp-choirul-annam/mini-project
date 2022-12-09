@@ -1,0 +1,64 @@
+.container {
+      width: 100%;
+      min-height: 100vh;
+      padding: 100px;
+}
+
+.toolbar {
+      width: 100%;
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+}
+
+.tab {
+      display: flex;
+      gap: 20px;
+}
+
+.tab-item {
+      padding: 0.8em 1.2em;
+      border-radius: 10px;
+      border: 1px solid hsl(200, 20%, 95%);
+      cursor: pointer;
+      transition: 0.2s;
+}
+
+.tab-item.active {
+      background-color: hsl(200, 20%, 95%);
+}
+
+.search {
+      position: relative;
+      display: flex;
+      align-items: center;
+}
+
+.search-icon {
+      position: absolute;
+      left: 1em;
+      pointer-events: none;
+}
+
+.search-input {
+      font-size: 1rem;
+      color: inherit;
+      padding: 0.8em;
+      padding-left: 3em;
+      outline: none;
+      border: 1px solid hsl(200, 20%, 95%);
+      border-radius: 10px;
+}
+
+.content {
+      width: 100%;
+      padding-top: 40px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+}
+
+app-menu-card {
+      width: calc((100% / 3) - 30px);
+}

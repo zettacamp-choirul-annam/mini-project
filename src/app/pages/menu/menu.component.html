@@ -1,0 +1,17 @@
+<div class="container">
+      <div class="toolbar">
+            <div class="tab">
+                  <div class="tab-item" [ngClass]="{ active: currentTab == 'discover' }" (click)="switchTab('discover')">Discover</div>
+                  <div class="tab-item" [ngClass]="{ active: currentTab == 'favorite' }" (click)="switchTab('favorite')">Favorite</div>
+            </div>
+            <div class="search">
+                  <i-feather class="search-icon" name="search"></i-feather>
+                  <input class="search-input" type="search" #search (input)="onSearch(search.value)" placeholder="search menu here...">
+            </div>
+      </div>
+      <div class="content">
+            <app-menu-card 
+                  *ngFor="let menu of menus" [menu]="menu" (_order)="openDialog(menu)">
+            </app-menu-card>
+      </div>
+</div>
