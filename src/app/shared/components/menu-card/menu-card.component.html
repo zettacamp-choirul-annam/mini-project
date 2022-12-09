@@ -1,0 +1,26 @@
+<div class="menu">
+      <div class="menu-badge" *ngIf="isDiscount">-{{ menu.discount }} <span>%</span></div>
+
+      <img class="menu-picture" [src]="menu.picture">
+      <div class="menu-name">{{ menu.name }}</div>
+
+      <div class="menu-info">
+            <div class="menu-rating">{{ menu.avg_rating }} <i-feather name="star"></i-feather></div>
+            <div class="menu-price">
+                  <span *ngIf="isDiscount">{{ menu.price_after_discount | currency:'Rp ':'symbol':'3.0' }}</span>
+                  <sup  *ngIf="isDiscount">{{ menu.price | currency:'Rp ':'symbol':'3.0' }}</sup>
+                  <span *ngIf="!isDiscount">{{ menu.price | currency:'Rp ':'symbol':'3.0' }}</span>
+            </div>
+      </div>
+      
+      <div class="menu-action">
+            <button class="menu-action-order" [disabled]="!isAvailable" mat-flat-button color="primary" (click)="onOrder()">
+                  <span *ngIf="isAvailable">Order</span>
+                  <span *ngIf="!isAvailable">Out of stock</span>
+            </button>
+            
+            <button class="menu-action-favorite" [ngClass]="{ active: isFavorite }" mat-flat-button *ngIf="showFavorite" (click)="toggleFavorite()">
+                  <i-feather name="heart"></i-feather>
+            </button>
+      </div>
+</div>
