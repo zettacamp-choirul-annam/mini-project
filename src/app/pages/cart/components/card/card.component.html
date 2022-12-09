@@ -1,0 +1,20 @@
+<div class="card" >
+      <img class="card-picture" [src]="menu.picture">
+      <div class="card-content">
+            <h2 class="card-menu-name">
+                  {{ menu.name }} <div class="card-menu-decline" *ngIf="oos">Out of stock</div>
+            </h2>
+            <div class="card-menu-price">
+                  <span *ngIf="isDiscount">{{ menu.price_after_discount | currency:'Rp ':'symbol':'3.0' }}</span>
+                  <sup  *ngIf="isDiscount">{{ menu.price | currency:'Rp ':'symbol':'3.0' }}</sup>
+                  <span *ngIf="!isDiscount">{{ menu.price | currency:'Rp ':'symbol':'3.0' }}</span>
+            </div>
+      </div>
+      <div class="card-menu-total-price">
+            {{ ((isDiscount ? menu.price_after_discount : menu.price )* cart.amount) | currency:'Rp ':'symbol':'3.0' }}
+      </div>
+      <app-quantity-input class="card-quantity" [min]="1" [value]="cart.amount" (_change)="updateCart($event)"></app-quantity-input>
+      <button class="card-delete" mat-icon-button (click)="deleteCart($event)">
+            <i-feather name="trash"></i-feather>
+      </button>
+</div>

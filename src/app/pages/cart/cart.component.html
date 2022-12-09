@@ -1,0 +1,28 @@
+<div class="container">
+      <div *ngIf="isEmpty; then empty else content"></div>
+</div>
+
+<ng-template #empty>
+      <div class="empty-container">
+            <img src="https://assets.epicurious.com/photos/580fa2a44eeca03265dbe5b9/1:1/w_1371,h_1371,c_limit/kitchen-fire-102516.jpg" alt="" class="empty-image">
+            <h2>Cart empty</h2>
+            <a class="empty-action" routerLink="/menu">go to menu</a>
+      </div>
+</ng-template>
+
+<ng-template #content>
+      <div class="content">
+            <div class="card-container">
+                  <app-card class="card" 
+                        *ngFor="let cart of carts" [cart]="cart" 
+                        (_deleted)="getCarts()" 
+                        (_updated)="getCarts()"
+                        [oos]="declineStocks.includes(cart.recipe_id._id)"
+                  ></app-card>
+            </div>
+      </div>
+      <div class="toolbar">
+            <div class="total-price">Total: {{ cartPrice | currency:'Rp ':'symbol':'3.0' }}</div>
+            <button mat-flat-button color="primary" (click)="checkout()">checkout</button>
+      </div>
+</ng-template>

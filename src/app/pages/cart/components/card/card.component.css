@@ -1,0 +1,50 @@
+.card {
+      width: 100%;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+}
+
+.card-picture {
+      width: 120px;
+      height: 120px;
+      margin-right: 40px;
+      object-fit: contain;
+}
+
+.card-content {
+      margin-right: auto;
+}
+
+.card-menu-name {
+      margin-bottom: 5px;
+      display: flex;
+}
+
+.card-menu-decline {
+      font-size: 0.8rem;
+      margin-left: 20px;
+      padding: 8px 12px;
+      color: rgb(255, 0, 76);
+      background-color: rgba(255, 0, 76, 0.1);
+      border-radius: 10px;
+}
+
+.card-menu-price {
+      font-weight: 500;
+}
+
+.card-menu-price sup {
+      font-size: 0.8em;
+      text-decoration: line-through;
+      margin-left: 0.5em;
+      opacity: 0.6;
+}
+
+.card-menu-total-price {
+      font-weight: 500;
+}
+
+.card-quantity {
+      margin: 0 40px;
+}
