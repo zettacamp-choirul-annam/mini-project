@@ -1,0 +1,9 @@
+<div class="quantity">
+      <button type="button" class="quantity-button" (click)="decrement()" [disabled]="isReachMin">
+            <i-feather name="minus"></i-feather>
+      </button>
+      <div class="quantity-value">{{ value }}</div>
+      <button type="button" class="quantity-button" (click)="increment()" [disabled]="isReachMax">
+            <i-feather name="plus"></i-feather>
+      </button>
+</div>

@@ -1,0 +1,29 @@
+:host {
+      width: fit-content;
+}
+
+.quantity {
+      display: flex;
+      align-items: center;
+}
+
+.quantity-button {
+      line-height: 0;
+      width: 35px;
+      height: 35px;
+      border: 1px solid currentColor;
+      border-radius: 50%;
+}
+
+.quantity-button i-feather::ng-deep svg {
+      width: 0.9em;
+}
+
+.quantity-button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+}
+
+.quantity-value {
+      margin: 0 15px;
+}
