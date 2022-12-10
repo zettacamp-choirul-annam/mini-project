@@ -1,0 +1,43 @@
+.form-group {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+}
+
+.form-section {
+      font-weight: 500;
+      margin-bottom: 20px;
+}
+
+.form-checkbox {
+      margin-bottom: 20px;
+}
+
+.form-checkbox::ng-deep .mat-checkbox-label {
+      font-size: 0.85rem;
+}
+
+/* ingredient */
+
+.ingredient-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+}
+
+.ingredient {
+      width: 100%;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+}
+
+.ingredient-number {
+      width: 1rem;
+      opacity: 0.6;
+}
+
+.ingredient-used {
+      width: 6rem;
+}

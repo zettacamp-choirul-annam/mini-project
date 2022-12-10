@@ -1,0 +1,83 @@
+<div class="mat-dialog-head">
+      <h1 class="mat-dialog-title">{{ data.edit ? 'Update' : 'Add' }} item</h1>
+</div>
+
+<div class="mat-dialog-body" mat-dialog-content>
+      <form class="form" [formGroup]="form">
+            <mat-form-field class="form-field" floatLabel="always">
+                  <mat-label>name</mat-label>
+                  <input matInput type="text" formControlName="name" [maxLength]="40">
+            </mat-form-field>
+            
+            <div class="form-group">
+                  <mat-form-field class="form-field" floatLabel="always">
+                        <mat-label>price</mat-label>
+                        <input matInput type="number" min="1" formControlName="price">
+                  </mat-form-field>
+                  <mat-form-field class="form-field" floatLabel="always">
+                        <mat-label>discount (%)</mat-label>
+                        <input matInput type="number" formControlName="discount">
+                  </mat-form-field>
+            </div>
+
+            <mat-checkbox 
+                  class="form-field form-checkbox" 
+                  [checked]="data.menu?.discount_status == 'ACTIVE' || false"
+                  (change)="toggleDiscount($event.checked)">
+                  Enable discount?
+            </mat-checkbox>
+
+            <mat-form-field class="form-field" floatLabel="always">
+                  <mat-label>picture</mat-label>
+                  <input matInput type="text" formControlName="picture">
+            </mat-form-field>
+
+            <mat-form-field class="form-field" floatLabel="always">
+                  <mat-label>description</mat-label>
+                  <textarea matInput formControlName="description"></textarea>
+            </mat-form-field>
+
+            <div class="form-section">Ingredients</div>
+
+            <div class="ingredient-container" formArrayName="ingredients">
+
+                  <div class="ingredient" *ngFor="let control of ingredientsForm.controls; let i = index" [formGroupName]="i">
+                        <div class="ingredient-number">{{ i + 1 }}.</div>
+
+                        <mat-form-field class="ingredient-name" floatLabel="always">
+                              <mat-label>ingredient name</mat-label>
+                              <mat-select #ingredient_input formControlName="ingredient_id">
+                                    <mat-option *ngFor="let stock of stocks" [value]="stock._id">{{ stock.name }}</mat-option>
+                              </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field class="ingredient-used" floatLabel="always">
+                              <mat-label>amount</mat-label>
+                              <input matInput type="number" formControlName="stock_used">
+                              <div matSuffix *ngFor="let stock of stocks">
+                                    <span *ngIf="stock._id == ingredient_input.value">{{ stock.unit }}</span>
+                              </div>
+                        </mat-form-field>
+                        
+                        <button 
+                              mat-icon-button 
+                              class="ingredient-remove" 
+                              (click)="removeIngredient(i)"
+                              [disabled]="ingredientsForm.controls.length == 1">
+                              <i-feather name="trash"></i-feather>
+                        </button>
+                  </div>
+
+                  <button class="ingredient-add" mat-flat-button (click)="addIngredient()">
+                        <i-feather name="plus"></i-feather> add ingredient
+                  </button>
+            </div>
+      </form>
+</div>
+
+<div class="mat-dialog-foot" mat-dialog-actions align="end">
+      <button mat-flat-button mat-dialog-close>Cancel</button>
+      <button mat-flat-button color="primary" cdkFocusInitial [disabled]="form.invalid" (click)="onSubmit()">
+            {{ data.edit ? 'Update' : 'Add' }}
+      </button>
+</div>

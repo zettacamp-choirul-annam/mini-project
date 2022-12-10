@@ -1,0 +1,162 @@
+<app-container>
+      <app-toolbar>
+            <button mat-flat-button color="primary" (click)="openDialog(null, false)">
+                  <i-feather name="plus"></i-feather> Add new item
+            </button>
+      </app-toolbar>
+
+      <div class="content">
+             <!-- loading -->
+             <div class="content-loading" *ngIf="inProgress">
+                  <app-spinbar></app-spinbar>
+            </div>
+
+            <!-- error -->
+            <div class="content-error" *ngIf="isError">
+                  <img src="../../../assets/images/empty.svg" alt="" class="content-error-image">
+                  <div class="content-error-message">{{ errorMessage }}</div>
+            </div>
+
+            <table mat-table [dataSource]="source" [formGroup]="filters">
+                  <!-- Picture Column -->
+                  <ng-container matColumnDef="picture">
+                        <th mat-header-cell center *matHeaderCellDef>Picture</th>
+                        <td mat-cell center *matCellDef="let item">
+                              <img width="100px" [src]="item.picture" alt="">
+                        </td>
+                  </ng-container>
+
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="name">
+                        <th mat-header-cell center *matHeaderCellDef>Name</th>
+                        <td mat-cell center *matCellDef="let item">{{ item.name }}</td>
+                  </ng-container>
+
+                  <!-- Price Column -->
+                  <ng-container matColumnDef="price">
+                        <th mat-header-cell center *matHeaderCellDef>Price</th>
+                        <td mat-cell center *matCellDef="let item">{{ item.price | currency:'Rp ':'symbol':'3.0' }}</td>
+                  </ng-container>
+
+                  <!-- Discount Column -->
+                  <ng-container matColumnDef="discount">
+                        <th mat-header-cell center *matHeaderCellDef>Discount</th>
+                        <td mat-cell center *matCellDef="let item">{{ item.discount }}%</td>
+                  </ng-container>
+
+                  <!-- Offer Column -->
+                  <ng-container matColumnDef="offer">
+                        <th mat-header-cell center *matHeaderCellDef>Offer</th>
+                        <td mat-cell center *matCellDef="let item">
+                              <mat-slide-toggle [checked]="item.isOffer" [disabled]="item.published" (click)="updateOfferStatus($event, item)"></mat-slide-toggle>
+                        </td>
+                  </ng-container>
+
+                  <!-- Published Column -->
+                  <ng-container matColumnDef="published">
+                        <th mat-header-cell center *matHeaderCellDef>Published</th>
+                        <td mat-cell center *matCellDef="let item">
+                              <mat-slide-toggle [checked]="item.published" (click)="updatePublishedStatus($event, item)"></mat-slide-toggle>
+                        </td>
+                  </ng-container>
+
+                  <!-- Actions Column -->
+                  <ng-container matColumnDef="actions">
+                        <th mat-header-cell center *matHeaderCellDef>Actions</th>
+                        <td mat-cell center *matCellDef="let item">
+                              <div class="action-wrapper">
+                                    <button mat-flat-button class="action-button action-update" (click)="updateMenu(item)">
+                                          <i-feather name="edit2"></i-feather>
+                                    </button>
+                                    <button mat-flat-button class="action-button action-delete" (click)="deleteMenu(item)">
+                                          <i-feather name="trash"></i-feather>
+                                    </button>
+                              </div>
+                        </td>
+                  </ng-container>
+
+                  <!-- Picture Filter (unused) -->
+                  <ng-container matColumnDef="picture-filter">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                  </ng-container>
+
+                  <!-- Name Filter -->
+                  <ng-container matColumnDef="name-filter">
+                        <th mat-header-cell center *matHeaderCellDef>
+                              <mat-form-field class="form-field" floatLabel="always">
+                                    <mat-label>filter</mat-label>
+                                    <input matInput type="text" formControlName="recipe_name">
+                              </mat-form-field>
+                        </th>
+                  </ng-container>
+
+                  <!-- Price Filter -->
+                  <ng-container matColumnDef="price-filter">
+                        <th mat-header-cell center *matHeaderCellDef>
+                              <mat-form-field class="form-field" floatLabel="always">
+                                    <mat-label>filter</mat-label>
+                                    <input matInput type="number" [disabled]="true">
+                              </mat-form-field>
+                        </th>
+                  </ng-container>
+
+                  <!-- Discount Filter -->
+                  <ng-container matColumnDef="discount-filter">
+                        <th mat-header-cell center *matHeaderCellDef>
+                              <mat-form-field class="form-field" floatLabel="always">
+                                    <mat-label>filter</mat-label>
+                                    <input matInput type="number" [disabled]="true">
+                              </mat-form-field>
+                        </th>
+                  </ng-container>
+
+                  <!-- Offer Filter -->
+                  <ng-container matColumnDef="offer-filter">
+                        <th mat-header-cell center *matHeaderCellDef>
+                              <mat-form-field class="form-select" floatLabel="always">
+                                    <mat-label>filter</mat-label>
+                                    <mat-select value="" [disabled]="true">
+                                          <mat-option value="">All</mat-option>
+                                          <mat-option value="ACTIVE">Active</mat-option>
+                                          <mat-option value="INACTIVE">Inactive</mat-option>
+                                    </mat-select>
+                              </mat-form-field>
+                        </th>
+                  </ng-container>
+
+                  <!-- Published Filter -->
+                  <ng-container matColumnDef="published-filter">
+                        <th mat-header-cell center *matHeaderCellDef>
+                              <mat-form-field class="form-select" floatLabel="always">
+                                    <mat-label>filter</mat-label>
+                                    <mat-select value="" formControlName="recipe_status">
+                                          <mat-option value="">All</mat-option>
+                                          <mat-option value="ACTIVE">Published</mat-option>
+                                          <mat-option value="UNPUBLISH">Unpublished</mat-option>
+                                    </mat-select>
+                              </mat-form-field>
+                        </th>
+                  </ng-container>
+
+                  <!-- Actions Filter -->
+                  <ng-container matColumnDef="actions-filter">
+                        <th mat-header-cell center *matHeaderCellDef>
+                              <div class="action-wrapper">
+                                    <button mat-flat-button class="action-button action-clear" matTooltip="clear filter" (click)="clearFilters()">
+                                          <i-feather name="x"></i-feather>
+                                    </button>
+                                    <button mat-flat-button class="action-button action-search" matTooltip="apply filter" (click)="applyFilters()">
+                                          <i-feather name="search"></i-feather>
+                                    </button>
+                              </div>
+                        </th>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                  <tr mat-header-row *matHeaderRowDef="filterColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+            </table>
+      </div>
+
+      <mat-paginator (page)="onPaginatorChange($event)" [pageIndex]="pagination.page" [pageSize]="pagination.limit" [length]="pagination.total"></mat-paginator>
+</app-container>
