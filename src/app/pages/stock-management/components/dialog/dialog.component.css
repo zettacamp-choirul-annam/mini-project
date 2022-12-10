@@ -1,0 +1,13 @@
+.form-field-group {
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+}
+
+.form-field-group .form-field {
+      flex: 1;
+}
+
+.form-select {
+      width: 5rem;
+}

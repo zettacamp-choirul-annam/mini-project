@@ -1,0 +1,73 @@
+.content {
+      position: relative;
+      width: 100%;
+      min-height: 500px;
+}
+
+.content-loading,
+.content-error {
+      position: absolute;
+      top: 0; left: 0;
+      z-index: 100;
+      width: 100%; height: 100%;
+      padding-top: 150px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+}
+
+.content-loading {
+      background-color: rgba(255, 255, 255, 0.8);
+}
+
+.content-error-image {
+      width: 200px;
+      height: auto;
+      margin-bottom: 20px;
+}
+
+.content-error-message {
+      font-size: 1.2rem;
+      font-weight: 500;
+}
+
+.action-wrapper {
+      display: inline-flex;
+      gap: 10px;
+}
+
+.action-button i-feather {
+      margin: 0;
+}
+
+.status {
+      padding: 0.8em;
+      border-radius: 0.5em;
+}
+
+.action-update,
+.status-used {
+      color: #11c580;
+      background-color: rgba(17, 197, 128, 0.1);
+}
+
+.action-delete,
+.status-unused {
+      color: #ff3300;
+      background-color: rgba(255, 51, 0, 0.1);
+}
+
+.mat-header-row:nth-child(1) th {
+      border-bottom: none;
+}
+
+.mat-paginator {
+      margin-top: 40px;
+}
+
+/* hide paginatior page size */
+.mat-paginator::ng-deep .mat-paginator-page-size {
+      display: none;
+}

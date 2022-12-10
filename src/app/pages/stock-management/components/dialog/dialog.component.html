@@ -1,0 +1,36 @@
+<div class="mat-dialog-head">
+      <h1 class="mat-dialog-title">{{ data.edit ? 'Update' : 'Add' }} item</h1>
+</div>
+
+<div class="mat-dialog-body" mat-dialog-content [formGroup]="form">
+      <form>
+            <!-- Name Field -->
+            <mat-form-field class="form-field" floatLabel="always">
+                  <mat-label>name</mat-label>
+                  <input matInput type="text" formControlName="name">
+            </mat-form-field>
+
+            <div class="form-field-group">
+                  <!-- Stock Field -->
+                  <mat-form-field class="form-field" floatLabel="always">
+                        <mat-label>stock</mat-label>
+                        <input matInput type="number" min="1" formControlName="stock">
+                  </mat-form-field>
+
+                  <!-- Unit Field -->
+                  <mat-form-field class="form-select" floatLabel="always">
+                        <mat-label>unit</mat-label>
+                        <mat-select formControlName="unit">
+                              <mat-option *ngFor="let unit of units" [value]="unit">{{ unit }}</mat-option>
+                        </mat-select>
+                  </mat-form-field>
+            </div>
+      </form>
+</div>
+
+<div class="mat-dialog-foot" mat-dialog-actions align="end">
+      <button mat-flat-button mat-dialog-close>Cancel</button>
+      <button mat-flat-button color="primary" cdkFocusInitial [disabled]="form.invalid" (click)="onSubmit()">
+            {{ data.edit ? 'Update' : 'Add' }}
+      </button>
+</div>
