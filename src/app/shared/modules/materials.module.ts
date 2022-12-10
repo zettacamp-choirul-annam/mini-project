@@ -10,6 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
       imports: [
@@ -22,7 +23,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
             MatSelectModule,
             MatSlideToggleModule,
             MatTableModule,
-            MatTooltipModule
+            MatTooltipModule,
+            MatCheckboxModule
       ],
       exports: [
             MatButtonModule,
@@ -34,7 +36,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
             MatSelectModule,
             MatSlideToggleModule,
             MatTableModule,
-            MatTooltipModule
+            MatTooltipModule,
+            MatCheckboxModule
       ]
 })
 export class MaterialsModule { }
