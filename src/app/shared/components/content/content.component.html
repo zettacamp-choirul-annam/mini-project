@@ -1,0 +1,13 @@
+<div class="content">
+      <div class="content-state" *ngIf="showState && (isError || inProgress)">
+            <div class="content-error" *ngIf="isError">
+                  <img class="content-error-image" src="../../../../assets/images/empty.svg">
+                  <div class="content-error-message">{{ errorMessage }}</div>
+            </div>
+            <div class="content-loading" *ngIf="inProgress">
+                  <app-spinbar></app-spinbar>
+            </div>
+      </div>
+      
+      <ng-content></ng-content>
+</div>
