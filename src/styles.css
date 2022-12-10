@@ -63,6 +63,7 @@ button {
 
 ::-webkit-scrollbar {
       width: 5px;
+      height: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -70,7 +71,7 @@ button {
 }
 
 ::-webkit-scrollbar-thumb {
-      background-color: rgba(0, 0, 0, 0.2);
+      background-color: rgba(0, 0, 0, 0.1);
       border-radius: 50px;
 }
 
@@ -153,6 +154,7 @@ i-feather > svg {
 .mat-flat-button, .mat-stroked-button, 
 .mat-raised-button, .mat-button, .mat-icon-button,
 .mat-fab, .mat-mini-fab {
+      color: inherit;
       font-size: 0.9rem;
       font-weight: 500;
       line-height: normal !important;
@@ -297,6 +299,7 @@ i-feather > svg {
 /******************* material form field ********************/
 
 .mat-form-field {
+      font-size: inherit;
       line-height: inherit;
 }
 
@@ -305,4 +308,9 @@ i-feather > svg {
 .mat-select-panel:not([class*="mat-elevation-z"]) {
       border-radius: 10px !important;
       box-shadow: 0 10px 20px rgba(119, 140, 202, 0.4);
+}
+
+.mat-select-value {
+      font-size: inherit;
+      color: inherit;
 }
