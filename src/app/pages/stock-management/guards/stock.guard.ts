@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Injectable({
       providedIn: 'root'
 })
-export class StockManagementGuard implements CanActivate {
+export class StockGuard implements CanActivate {
       constructor(
             private authService: AuthService,
             private router: Router
