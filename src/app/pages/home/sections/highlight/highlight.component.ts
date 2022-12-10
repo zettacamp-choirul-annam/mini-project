@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { MenuService } from 'src/app/shared/services/menu.service';
 
 @Component({
       selector: 'app-highlight',
@@ -6,7 +8,23 @@ import { Component, OnInit } from '@angular/core';
       styleUrls: ['./highlight.component.css']
 })
 export class HighlightComponent implements OnInit {
-      constructor() { }
+      sub!: Subscription;
+      menus: any = [];
 
-      ngOnInit(): void { }
+      constructor(
+            private menuService: MenuService
+      ) { }
+
+      ngOnInit(): void {
+            this.sub = this.menuService.getHighlightMenu().subscribe({
+                  next: (result) => this.menus = result,
+                  error: (error) => {
+                        console.log(error);
+                  }
+            });
+      }
+
+      ngOnDestroy() {
+            this.sub.unsubscribe();
+      }
 }

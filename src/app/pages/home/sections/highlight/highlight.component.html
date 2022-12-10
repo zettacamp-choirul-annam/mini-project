@@ -3,6 +3,6 @@
       <h3 class="subheading">Present from the menu that most people like</h3>
 
       <div class="content">
-            content
+            <app-menu-card class="menu-card" *ngFor="let menu of menus" [menu]="menu" [showFavorite]="false"></app-menu-card>
       </div>
 </div>

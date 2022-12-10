@@ -135,12 +135,13 @@ export class MenuService {
                   query GetTop3Recipes {
                         getTop3Recipes {
                               _id
-                              name
                               picture
+                              name
+                              avg_rating
                               price
                               discount
-                              price_after_discount
                               discount_status
+                              price_after_discount
                               availableStock
                         }
                   }
