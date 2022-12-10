@@ -97,8 +97,7 @@ i-feather > svg {
 
 .swal2-popup {
       color: inherit !important;
-      width: unset !important;
-      min-width: 400px !important;
+      width: 400px !important;
       padding: 30px !important;
       border-radius: 20px !important;
 }
@@ -110,7 +109,7 @@ i-feather > svg {
 .swal2-title {
       font-size: 1.6rem !important;
       padding: 0 !important;
-      margin: 20px 0 10px 0 !important;
+      margin: 20px 0 20px 0 !important;
 }
 
 .swal2-html-container {
@@ -197,7 +196,7 @@ i-feather > svg {
 
 .mat-menu-panel {
       border-radius: 20px !important;
-      box-shadow: 0 10px 50px rgba(119, 140, 202, 0.2);
+      box-shadow: 0 10px 50px rgba(119, 140, 202, 0.4);
 }
 
 .mat-menu-item {
@@ -261,4 +260,49 @@ i-feather > svg {
 
 .mat-dialog-foot {
       padding: 18px 0 !important;
+}
+
+/******************* material table ********************/
+
+.mat-table {
+      background-color: transparent;
+}
+
+/* .mat-table tr:nth-child(even) {
+      background-color: hsl(200, 20%, 95%);
+} */
+
+.mat-table tr.mat-header-row,
+.mat-table tr.mat-row, 
+.mat-table tr.mat-footer-row {
+      height: 4rem !important;
+}
+
+.mat-header-cell {
+      font-size: 1em;
+      font-weight: 500;
+      color: inherit;
+}
+
+.mat-cell {
+      font-size: 0.85rem;
+      color: inherit;
+}
+
+.mat-header-cell[center],
+.mat-cell[center] {
+      text-align: center;
+}
+
+/******************* material form field ********************/
+
+.mat-form-field {
+      line-height: inherit;
+}
+
+/******************* material select ********************/
+
+.mat-select-panel:not([class*="mat-elevation-z"]) {
+      border-radius: 10px !important;
+      box-shadow: 0 10px 20px rgba(119, 140, 202, 0.4);
 }
