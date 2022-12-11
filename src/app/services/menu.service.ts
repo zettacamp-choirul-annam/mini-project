@@ -108,6 +108,59 @@ export class MenuService {
             );
       }
 
+      getOffers() {
+            const query = `
+                  query {
+                        getSpecialOffersRecipes {
+                              _id
+                              availableStock
+                              avg_rating
+                              description
+                              discount
+                              discount_status
+                              name
+                              picture
+                              price
+                              price_after_discount
+                        }
+                  }`;
+            
+            const response = this.apollo.query({
+                  query: gql(query),
+                  fetchPolicy: 'network-only'
+            });
+
+            return response.pipe(
+                  map((result: any) => result.data.getSpecialOffersRecipes)
+            );
+      }
+
+      getHighlight() {
+            const query = `
+                  query {
+                        getTop3Recipes {
+                              _id
+                              picture
+                              name
+                              avg_rating
+                              price
+                              discount
+                              discount_status
+                              price_after_discount
+                              availableStock
+                        }
+                  }`;
+
+            const response = this.apollo.query({
+                  query: gql(query),
+                  fetchPolicy: 'network-only'
+            });
+
+            return response.pipe(
+                  map((result: any) => result.data.getTop3Recipes)
+            );
+      }
+
       create(data: any) {
             const query = `
                   mutation (
@@ -171,6 +224,54 @@ export class MenuService {
 
             return response.pipe(
                   map((result: any) => result.data.updateRecipe)
+            );
+      }
+
+      updatePublishedStatus(id: string, status: string) {
+            const query = `
+                  mutation ($id: ID!, $status: recipeStatusInput!) {
+                        updateRecipeStatus(_id: $id, recipe_status: $status) { _id }
+                  }`;
+
+            const response = this.apollo.mutate({
+                  mutation: gql(query),
+                  variables: { id, status }
+            });
+
+            return response.pipe(
+                  map((result: any) => result.data.updateRecipeStatus)
+            );
+      }
+
+      updateOfferStatus(id: string, status: string) {
+            const query = `
+                  mutation ($id: ID!, $status: offerStatus!) {
+                        updateOfferStatus(_id: $id, offer_status: $status) { _id }
+                  }`;
+
+            const response = this.apollo.mutate({
+                  mutation: gql(query),
+                  variables: { id, status }
+            });
+
+            return response.pipe(
+                  map((result: any) => result.data.updateOfferStatus)
+            );
+      }
+
+      updateDiscountStatus(id: string, status: string) {
+            const query = `
+                  mutation ($id: ID!, $status: discountStatus!) {
+                        updateDiscountStatus(_id: $id, discount_status: $status) { _id }
+                  }`;
+
+            const response = this.apollo.mutate({
+                  mutation: gql(query),
+                  variables: { id, status }
+            });
+
+            return response.pipe(
+                  map((result: any) => result.data.updateDiscountStatus)
             );
       }
 
