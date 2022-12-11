@@ -21,14 +21,16 @@
       width: 100%;
       display: flex;
       flex-wrap: wrap;
-      gap: 20px 30px;
+      gap: 30px;
 }
 
-.menu,
-.container::ng-deep .skeleton-loader {
-      position: relative;
+.container::ng-deep .skeleton-loader, .menu {
       width: calc(50% - 30px);
       height: 350px;
+}
+
+.menu {
+      position: relative;
       padding: 30px;
       display: flex;
       border-radius: 20px;
