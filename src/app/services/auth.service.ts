@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
+import { UserService } from './user.service';
 import { map } from 'rxjs';
 
 @Injectable({
@@ -9,7 +10,10 @@ export class AuthService {
       private readonly TOKEN_KEY = 'beef-token';
       private readonly USER_KEY  = 'beef-user';
 
-      constructor(private apollo: Apollo) { }
+      constructor(
+            private apollo: Apollo,
+            private userService: UserService
+      ) { }
 
       private setUser(data: any) {
             const { token, user } = data;
@@ -53,6 +57,10 @@ export class AuthService {
       logout() {
             localStorage.removeItem(this.TOKEN_KEY);
             localStorage.removeItem(this.USER_KEY);
+      }
+
+      register(data: any) {
+            return this.userService.create(data);
       }
 
       resetPassword(data: any) {
