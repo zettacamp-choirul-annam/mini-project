@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
@@ -20,19 +20,18 @@ export class HeaderComponent implements OnInit {
             this.user = this.authService.getUser();
       }
 
-      async onLogout() {
-            const swal = await Swal.fire({
+      onLogout() {
+            Swal.fire({
                   icon: 'question',
                   title: 'Logout',
                   text: 'Are you sure?',
                   showCancelButton: true,
-                  cancelButtonText: 'Stay here',
-                  confirmButtonText: 'logout'
+                  cancelButtonText: 'Cancel',
+                  confirmButtonText: 'Logout',
+                  preConfirm: () => {
+                        this.authService.logout();
+                        this.router.navigate(['/home']).then(() => window.location.reload());
+                  }
             });
-
-            if (swal.isDismissed) return;
-
-            this.authService.releaseUser();
-            this.router.navigate(['/home']).then(() => window.location.reload());
       }
 }
