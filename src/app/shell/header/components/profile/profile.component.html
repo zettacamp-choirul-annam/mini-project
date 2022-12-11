@@ -9,7 +9,7 @@
                   <div class="profile-email">
                         {{ user.email }}
                   </div>
-                  <div class="profile-credit">
+                  <div class="profile-credit" *ngIf="user?.role == 'USER'">
                         <i-feather name="credit-card"></i-feather> 
                         <span>{{ 100000 | currency:'Rp ' }}</span>
                   </div>
