@@ -57,6 +57,55 @@ export class MenuService {
             );
       }
 
+      getAllPublic(filters?: any) {
+            const query = `
+                  query ($filter: filterRecipe) {
+                        getAllRecipesPublic(filter: $filter) {
+                              total,
+                              listRecipe {
+                                    _id
+                                    availableStock
+                                    avg_rating
+                                    description
+                                    discount
+                                    discount_status
+                                    recipe_status
+                                    favorite_id
+                                    ingredients {
+                                          ingredient_id {
+                                                _id
+                                                name
+                                          }
+                                          stock_used
+                                    }
+                                    is_favorite
+                                    name
+                                    offer_status
+                                    picture
+                                    price
+                                    price_after_discount
+                              }
+                        }
+                  }
+            `;
+            
+            // default filters.
+            const defaults = { page: 0, limit: 100 };
+
+            // merge filters and default filters
+            filters = Object.assign(defaults, filters || {});
+            
+            const response = this.apollo.query({
+                  query: gql(query),
+                  variables: { filter: filters },
+                  fetchPolicy: 'network-only'
+            });
+
+            return response.pipe(
+                  map((result: any) => result.data.getAllRecipesPublic)
+            );
+      }
+
       getOne(id: string) {
             const query = `
                   query ($id: ID!) {

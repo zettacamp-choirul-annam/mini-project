@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MenuService } from '../menu-management/services/menu.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
@@ -17,6 +18,7 @@ export class MenuComponent implements OnInit {
       subs: Subscription[] = [];
       menus: any = [];
       id: string | null = '';
+      isLogedIn: any;
 
       // state
       isLoad : boolean = true;
@@ -27,12 +29,14 @@ export class MenuComponent implements OnInit {
 
       constructor(
             private menuService: MenuService,
+            private authService: AuthService,
             private route: ActivatedRoute,
             private router: Router,
             private dialog: MatDialog
       ) { }
 
       ngOnInit(): void {
+            this.isLogedIn = this.authService.getUser() != null;
             this.id = this.route.snapshot.queryParamMap.get('id');
             this.getMenus();
       }
@@ -44,7 +48,7 @@ export class MenuComponent implements OnInit {
       getMenus(filter?: any) {
             this.isLoad = true;
 
-            const sub = this.menuService.getAll(filter).subscribe({
+            const sub = this.menuService[this.isLogedIn ? 'getAll' : 'getAllPublic'](filter).subscribe({
                   next: (result) => {
                         this.menus = result.listRecipe;
 
@@ -75,7 +79,7 @@ export class MenuComponent implements OnInit {
       }
 
       openDialog(menu: any) {
-            this.dialog.open(DialogComponent, { data: menu });
+            this.dialog.open(DialogComponent, { data: { menu, isLogedIn: this.isLogedIn }, });
       }
 
       switchTab(name: string) {

@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CartService } from 'src/app/shared/services/cart.service';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { RatingService } from 'src/app/shared/services/rating.service';
 import Swal from 'sweetalert2';
@@ -13,6 +14,8 @@ import Swal from 'sweetalert2';
 export class DialogComponent implements OnInit {
       subs: Subscription[] = [];
       ratings: any = [];
+      menu: any;
+      isLogedIn: boolean = false;
 
       isAvailable: boolean = true;
       isFavorite : boolean = true;
@@ -22,11 +25,15 @@ export class DialogComponent implements OnInit {
       constructor(
             private ratingService: RatingService,
             private cartService: CartService,
+            private router: Router,
             private dialogRef: MatDialogRef<DialogComponent>,
-            @Inject(MAT_DIALOG_DATA) public menu: any,
+            @Inject(MAT_DIALOG_DATA) public data: any,
       ) { }
 
       ngOnInit(): void {
+            this.menu = this.data.menu;
+            this.isLogedIn = this.data.isLogedIn;
+
             this.isAvailable = this.menu.availableStock > 0;
             this.isFavorite  = this.menu.is_favorite;
             this.isDiscount  = this.menu.discount_status == 'ACTIVE';
@@ -50,7 +57,23 @@ export class DialogComponent implements OnInit {
             this.subs.push(sub);
       }      
 
-      addToCart(amount: number, id: string) {
+      async addToCart(amount: number, id: string) {
+            if (!this.isLogedIn) {
+                  const swal = await Swal.fire({
+                        icon: 'info',
+                        title: 'Login to continue',
+                        text: 'Please login or register to continue the order',
+                        showCancelButton: true,
+                        confirmButtonText: 'Login',
+                        cancelButtonText: 'Cancel'
+                  });
+      
+                  if (swal.isDismissed) return;
+
+                  this.dialogRef.close();
+                  this.router.navigate(['/auth/login']); return;
+            }
+
             const payload = { amount, recipe_id: id };
 
             const sub = this.cartService.create(payload).subscribe({
