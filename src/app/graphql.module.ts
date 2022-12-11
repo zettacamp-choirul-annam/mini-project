@@ -11,7 +11,7 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
       const http = httpLink.create({ uri });
 
       const middleware = new ApolloLink((operation, forward) => {
-            const token = localStorage.getItem('token') || null;
+            const token = localStorage.getItem('beef-token') || null;
 
             operation.setContext({
                   headers: new HttpHeaders().set('Authorization', `${token}`)
