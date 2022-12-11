@@ -97,6 +97,34 @@ export class MenuService {
             );
       }
 
+      getOffers() {
+            const query = `
+                  query {
+                        getSpecialOffersRecipes {
+                              _id
+                              availableStock
+                              avg_rating
+                              description
+                              discount
+                              discount_status
+                              name
+                              picture
+                              price
+                              price_after_discount
+                        }
+                  }
+            `;
+            
+            const response = this.apollo.query({
+                  query: gql(query),
+                  fetchPolicy: 'network-only'
+            });
+
+            return response.pipe(
+                  map((result: any) => result.data.getSpecialOffersRecipes)
+            );
+      }
+
       create(data: any) {
             const query = `
                   mutation (
