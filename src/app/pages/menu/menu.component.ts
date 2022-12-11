@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { MenuService } from 'src/app/shared/services/menu.service';
-import { FavoriteService } from 'src/app/shared/services/favorite.service';
+import { MenuService } from '../menu-management/services/menu.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { DialogComponent } from './components/dialog/dialog.component';
@@ -15,19 +15,25 @@ export class MenuComponent implements OnInit {
       @ViewChild('search') $search!: ElementRef;
 
       subs: Subscription[] = [];
-      inProgress: boolean = true;
       menus: any = [];
+      id: string | null = '';
+
+      // state
+      isLoad : boolean = true;
+      isError: boolean = false;
 
       currentTab: string = 'discover';
       searchTimeout: any = null;
 
       constructor(
             private menuService: MenuService,
-            private favoriteService: FavoriteService,
+            private route: ActivatedRoute,
+            private router: Router,
             private dialog: MatDialog
       ) { }
 
       ngOnInit(): void {
+            this.id = this.route.snapshot.queryParamMap.get('id');
             this.getMenus();
       }
       
@@ -36,12 +42,28 @@ export class MenuComponent implements OnInit {
       }
 
       getMenus(filter?: any) {
+            this.isLoad = true;
+
             const sub = this.menuService.getAll(filter).subscribe({
                   next: (result) => {
                         this.menus = result.listRecipe;
+
+                        if (this.id) {
+                              const menu = this.menus.filter((item: any) => item._id == this.id)[0];
+                              this.openDialog(menu);
+
+                              // remove query param after dialog opened
+                              this.router.navigate([], { relativeTo: this.route, queryParams: { id: null }, queryParamsHandling: 'merge' });
+                              this.id = null;
+                        }
+
+                        this.isLoad = false;
                   },
                   error: (error) => {
                         console.log(error);
+
+                        this.isLoad = false;
+                        this.isError = true;
                   }
             });
 
@@ -76,7 +98,10 @@ export class MenuComponent implements OnInit {
             }
 
             this.searchTimeout = setTimeout(() => {
-                  this.getMenus({ recipe_name: value, is_favorite_page: this.currentTab == 'favorite' });
+                  this.getMenus({ 
+                        recipe_name: value, 
+                        is_favorite_page: this.currentTab == 'favorite' 
+                  });
             }, 250);
       }
 }

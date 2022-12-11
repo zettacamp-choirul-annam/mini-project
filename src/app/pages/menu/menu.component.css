@@ -59,6 +59,9 @@
       gap: 40px;
 }
 
-app-menu-card {
+app-menu-card,
+.container::ng-deep .skeleton-loader {
       width: calc((100% / 3) - 30px);
+      min-height: 450px;
+      border-radius: 20px;
 }

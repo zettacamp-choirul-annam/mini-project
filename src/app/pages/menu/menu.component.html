@@ -9,7 +9,10 @@
                   <input class="search-input" type="search" #search (input)="onSearch(search.value)" placeholder="search menu here...">
             </div>
       </div>
-      <div class="content">
+
+      <ngx-skeleton-loader class="content" count="6" animation="progress" *ngIf="isLoad"></ngx-skeleton-loader>
+
+      <div class="content" *ngIf="!isLoad">
             <app-menu-card 
                   *ngFor="let menu of menus" [menu]="menu" (_order)="openDialog(menu)">
             </app-menu-card>
