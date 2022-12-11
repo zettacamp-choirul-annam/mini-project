@@ -38,8 +38,6 @@ export class CartComponent implements OnInit {
       }
 
       getCarts() {
-            this.isLoad = true;
-
             const sub = this.cartService.getAll().subscribe({
                   next: (result) => {
                         this.carts = result.listCart;
@@ -47,6 +45,7 @@ export class CartComponent implements OnInit {
                         this.isLoad = false;
                   },
                   error: (error) => {
+                        this.isLoad = false;
                         const code = error.graphQLErrors[0].extensions.code;
                   
                         if (code == 'cart/cart-not-found') {
@@ -63,8 +62,6 @@ export class CartComponent implements OnInit {
                               title: 'Failed to get carts',
                               text: error.message
                         });
-
-                        this.isLoad = false;
                   }
             });
 

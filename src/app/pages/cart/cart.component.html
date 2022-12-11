@@ -1,5 +1,14 @@
 <div class="container">
-      <div *ngIf="isEmpty; then empty else content"></div>
+      <ngx-skeleton-loader class="card-container" count="3" animation="progress" *ngIf="isLoad"></ngx-skeleton-loader>
+
+      <div class="content">
+            <div *ngIf="isEmpty; then empty else content"></div>
+      </div>
+
+      <div class="toolbar">
+            <div class="total-price">Total: {{ cartPrice | currency:'Rp ':'symbol':'3.0' }}</div>
+            <button mat-flat-button color="primary" (click)="checkout()" [disabled]="isEmpty">checkout</button>
+      </div>
 </div>
 
 <ng-template #empty>
@@ -11,18 +20,12 @@
 </ng-template>
 
 <ng-template #content>
-      <div class="content">
-            <div class="card-container">
-                  <app-card class="card" 
-                        *ngFor="let cart of carts" [cart]="cart" 
-                        (_deleted)="getCarts()" 
-                        (_updated)="getCarts()"
-                        [oos]="declineStocks.includes(cart.recipe_id._id)"
-                  ></app-card>
-            </div>
-      </div>
-      <div class="toolbar">
-            <div class="total-price">Total: {{ cartPrice | currency:'Rp ':'symbol':'3.0' }}</div>
-            <button mat-flat-button color="primary" (click)="checkout()">checkout</button>
+      <div class="card-container">
+            <app-card class="card" 
+                  *ngFor="let cart of carts" [cart]="cart" 
+                  (_deleted)="getCarts()" 
+                  (_updated)="getCarts()"
+                  [oos]="declineStocks.includes(cart.recipe_id._id)"
+            ></app-card>
       </div>
 </ng-template>
