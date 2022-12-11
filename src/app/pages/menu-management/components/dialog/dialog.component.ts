@@ -80,10 +80,9 @@ export class DialogComponent implements OnInit {
             });
 
             if (this.data.edit) {
-                  // fuck typescript
-                  const menu: any = this.data.menu;
+                  // create new reference to avoid side effect
+                  const menu = Object.assign({}, this.data.menu);
 
-                  // remapping data menu
                   menu.ingredients = menu.ingredients.map((item: any) => {
                         // push ingredient form while looping :)
                         this.addIngredient();
