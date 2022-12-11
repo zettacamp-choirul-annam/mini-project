@@ -4,9 +4,9 @@ import { AuthComponent } from './auth.component';
 
 const subroutes: Routes = [
       { path: '', pathMatch: 'full', redirectTo: '/auth/login' },
-      { path: 'login', loadChildren: () => import('./subpages/login/login.module').then(m => m.LoginModule) },
-      { path: 'register', loadChildren: () => import('./subpages/register/register.module').then(m => m.RegisterModule) },
-      { path: 'reset-password', loadChildren: () => import('./subpages/reset-password/reset-password.module').then(m => m.ResetPasswordModule) }
+      { path: 'login', loadChildren: () => import('./routes/login/login.module').then(m => m.LoginModule) },
+      { path: 'register', loadChildren: () => import('./routes/register/register.module').then(m => m.RegisterModule) },
+      { path: 'reset-password', loadChildren: () => import('./routes/reset-password/reset-password.module').then(m => m.ResetPasswordModule) }
 ];
 
 const routes: Routes = [
