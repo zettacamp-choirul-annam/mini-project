@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MenuService } from 'src/app/pages/menu-management/services/menu.service';
+import { Router } from '@angular/router';
 import { extractColor } from 'src/app/shared/utils/extract-color';
 
 @Component({
@@ -17,7 +18,8 @@ export class OffersComponent implements OnInit {
       isError: boolean = false;
 
       constructor(
-            private menuService: MenuService
+            private menuService: MenuService,
+            private router: Router
       ) { }
 
       ngOnInit(): void {
@@ -59,4 +61,8 @@ export class OffersComponent implements OnInit {
       ngOnDestroy() {
             this.sub.unsubscribe();
       }
+
+      goToMenu(id: string) {
+            this.router.navigate(['/menu'], { queryParams: { id }});
+      } 
 }

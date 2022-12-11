@@ -5,7 +5,7 @@
       <ngx-skeleton-loader class="content" count="2" animation="progress" *ngIf="isLoad"></ngx-skeleton-loader>
       
       <div class="content" *ngIf="!isLoad">
-            <div class="menu" *ngFor="let offer of offers" [ngStyle]="offer.styles">
+            <div class="menu" *ngFor="let offer of offers" [ngStyle]="offer.styles" (click)="goToMenu(offer._id)">
                   <img class="menu-picture"[src]="offer.picture" alt="">
 
                   <div class="menu-info">
