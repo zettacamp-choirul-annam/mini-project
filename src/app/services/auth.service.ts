@@ -66,7 +66,7 @@ export class AuthService {
       resetPassword(data: any) {
             const query = `
                   mutation ($data: ForgotPasswordUsersInput) {
-                        forgotPassword(user_input: $data) { }
+                        forgotPassword(user_input: $data) { _id }
                   }`;
 
             const response = this.apollo.mutate({
