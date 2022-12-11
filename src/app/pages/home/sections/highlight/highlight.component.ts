@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { MenuService } from 'src/app/shared/services/menu.service';
+import { MenuService } from 'src/app/pages/menu-management/services/menu.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -22,7 +22,7 @@ export class HighlightComponent implements OnInit {
       ) { }
 
       ngOnInit(): void {
-            this.sub = this.menuService.getHighlightMenu().subscribe({
+            this.sub = this.menuService.getHighlight().subscribe({
                   next: (result) => {
                         this.isLoad = false;
                         this.menus = result;

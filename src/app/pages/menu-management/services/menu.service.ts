@@ -174,6 +174,33 @@ export class MenuService {
             );
       }
 
+      getHighlight() {
+            const query = gql`
+                  query GetTop3Recipes {
+                        getTop3Recipes {
+                              _id
+                              picture
+                              name
+                              avg_rating
+                              price
+                              discount
+                              discount_status
+                              price_after_discount
+                              availableStock
+                        }
+                  }
+            `;
+
+            const response = this.apollo.query({
+                  query: query,
+                  variables: { }
+            });
+
+            return response.pipe(
+                  map((result: any) => result.data.getTop3Recipes)
+            );
+      }
+
       create(data: any) {
             const query = `
                   mutation (

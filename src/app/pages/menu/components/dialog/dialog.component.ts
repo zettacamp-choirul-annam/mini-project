@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { CartService } from 'src/app/shared/services/cart.service';
+import { CartService } from 'src/app/pages/cart/services/cart.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { RatingService } from 'src/app/shared/services/rating.service';

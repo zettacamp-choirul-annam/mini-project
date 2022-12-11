@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
-import { map } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 
 @Injectable({
       providedIn: 'root'
 })
 export class UserService {
-      constructor(private apollo: Apollo) { }
+      private balance = new BehaviorSubject<number>(0);
+      balance$ = this.balance.asObservable();
+
+      constructor(private apollo: Apollo) {
+            this.refreshBalance();
+      }
 
       resetPassword(data: any) {
             const query = `#graphql
@@ -107,6 +112,28 @@ export class UserService {
             return response.pipe(
                   map((result: any) => result.data.getOneUser)
             );
+      }
+
+      refreshBalance() {
+            const query = `#graphql
+                  query { getOneUser { role, balance } }
+            `;
+
+            const response = this.apollo.query({
+                  query: gql(query),
+                  fetchPolicy: 'network-only'
+            });
+
+            const sub = response.pipe(map((result: any) => result.data.getOneUser)).subscribe({
+                  next: (result) => {
+                        sub.unsubscribe();
+                        if (result.role == 'ADMIN') return;
+                        this.balance.next(result.balance);
+                  },
+                  error: (error) => {
+                        sub.unsubscribe();
+                  }
+            });
       }
 
       create(data: any) {
