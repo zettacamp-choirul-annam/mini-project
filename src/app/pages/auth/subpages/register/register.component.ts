@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
             last_name: ['', Validators.required],
             email: ['', [Validators.email, Validators.required]],
             security_answer: ['', Validators.required],
-            password: ['', Validators.required],
+            password: ['', [Validators.required, Validators.minLength(8)]],
             role: ['USER'] // this is hidden field hehe
       });
 
