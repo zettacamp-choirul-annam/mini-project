@@ -30,10 +30,10 @@ export class CardComponent implements OnInit {
             this.user = this.transaction.user_id;
             
             this.menus = this.transaction.menu.map((item: any) => {
-                  return {
-                        amount: item.amount,
-                        ...item.recipe_id
-                  }
+                  const newItem = { ...item };
+                  newItem.recipe_id = item.recipe_id._id;
+                  
+                  return newItem;
             });
       }
 

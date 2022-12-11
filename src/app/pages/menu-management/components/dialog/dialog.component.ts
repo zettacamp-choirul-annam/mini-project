@@ -20,7 +20,7 @@ export class DialogComponent implements OnInit {
             picture: [''],
             price: [0, [Validators.required, Validators.min(0)]],
             description: ['', Validators.required],
-            discount: [{ value: 0, disabled: true }],
+            discount: [{ value: 0, disabled: true }, [Validators.min(1), Validators.max(100)]],
             discount_status: ['INACTIVE'], // hidden field
             ingredients: this.formBuilder.array([])
       });

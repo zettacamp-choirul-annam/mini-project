@@ -26,12 +26,13 @@ export class TransactionService {
                                     rating_status
                                     menu { 
                                           amount 
-                                          recipe_id { 
-                                                _id
-                                                picture
-                                                name 
-                                                price 
-                                          }
+                                          discount
+                                          discount_status
+                                          name, 
+                                          picture,
+                                          price 
+                                          price_after_discount
+                                          recipe_id { _id }
                                     }
                               }
                         }
@@ -60,12 +61,14 @@ export class TransactionService {
                               order_status,
                               menu { 
                                     amount, 
-                                    recipe_id { 
-                                          _id,
-                                          picture,
-                                          name, 
-                                          price 
-                                    }
+                                    amount 
+                                    discount
+                                    discount_status
+                                    name, 
+                                    picture,
+                                    price 
+                                    price_after_discount
+                                    recipe_id { _id }
                               }
                         }
                   }

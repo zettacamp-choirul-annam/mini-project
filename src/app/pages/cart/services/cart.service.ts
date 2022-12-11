@@ -30,8 +30,9 @@ export class CartService {
                                           name
                                           picture
                                           price,
-                                          price_after_discount
+                                          discount
                                           discount_status
+                                          price_after_discount
                                     } 
                               }
                         }
@@ -100,7 +101,7 @@ export class CartService {
 
       create(data: any) {
             const query = `#graphql
-                  mutation ($data: MenuInput) {
+                  mutation ($data: CartMenuInput) {
                         createCart(menu: $data) { status }
                   }
             `;

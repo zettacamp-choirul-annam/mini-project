@@ -71,12 +71,18 @@ export class CartComponent implements OnInit {
       checkout() {
             const carts = this.carts.map((cart: any) => {
                   return {
-                        amount: cart.amount,
                         recipe_id: cart.recipe_id._id,
-                        note: cart.note
+                        note: cart.note,
+                        amount: cart.amount,
+                        name: cart.recipe_id.name,
+                        picture: cart.recipe_id.picture,
+                        price: cart.recipe_id.price,
+                        discount_status: cart.recipe_id.discount_status,
+                        discount: cart.recipe_id.discount,
+                        price_after_discount: cart.recipe_id.price_after_discount,
                   }
             });
-
+            
             const payload = {
                   menus: carts,
                   price: this.cartPrice

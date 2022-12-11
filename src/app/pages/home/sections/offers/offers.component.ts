@@ -12,10 +12,7 @@ import { extractColor } from 'src/app/shared/utils/extract-color';
 export class OffersComponent implements OnInit {
       sub!: Subscription;
       offers: any = [];
-
-      // state
       isLoad : boolean = true;
-      isError: boolean = false;
 
       constructor(
             private menuService: MenuService,
@@ -43,17 +40,12 @@ export class OffersComponent implements OnInit {
                         });
 
                         Promise.all(proms).then(data => {
-                              console.log(data);
-                              
                               this.offers = data;
                               this.isLoad = false;
                         });
                   },
                   error: (error) => {
-                        console.log(error);
-
-                        this.isLoad = false;
-                        this.isError = true;
+                        console.error(error.message);
                   }
             });
       }
@@ -63,6 +55,6 @@ export class OffersComponent implements OnInit {
       }
 
       goToMenu(id: string) {
-            this.router.navigate(['/menu'], { queryParams: { id }});
+            this.router.navigate(['/menu'], { queryParams: { id } });
       } 
 }

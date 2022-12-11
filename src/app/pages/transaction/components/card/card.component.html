@@ -13,9 +13,9 @@
                   <img [src]="menu.picture" alt="" class="card-menu-picture">
                   <div class="card-menu-info">
                         <div class="card-menu-name">{{ menu.name }}</div>
-                        <div class="card-menu-price">{{ menu.amount }} x {{ menu.price | currency:'Rp ' }}</div>
+                        <div class="card-menu-price">{{ menu.amount }} x {{ menu.price_after_discount | currency:'Rp ' }}</div>
                   </div>
-                  <div class="card-menu-total">{{ menu.price * menu.amount | currency:'Rp ' }}</div>
+                  <div class="card-menu-total">{{ menu.price_after_discount * menu.amount | currency:'Rp ' }}</div>
             </div>
       </div>
       <div class="card-foot">
