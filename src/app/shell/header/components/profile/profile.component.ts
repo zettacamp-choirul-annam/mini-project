@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
       selector: 'app-profile',
@@ -8,10 +10,23 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class ProfileComponent implements OnInit {
       @Input() user: any;
       @Output() _logout = new EventEmitter();
+      
+      sub!: Subscription;
+      balance: number = 0;
 
-      constructor() { }
+      constructor(
+            private userService: UserService
+      ) { }
 
-      ngOnInit(): void { }
+      ngOnInit(): void {
+            this.sub = this.userService.balance$.subscribe(balance => {
+                  this.balance = balance;
+            });
+      }
+      
+      ngOnDestroy() {
+            this.sub.unsubscribe();
+      }
 
       onLogout() { this._logout.emit() }
 }

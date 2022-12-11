@@ -11,7 +11,7 @@
                   </div>
                   <div class="profile-credit" *ngIf="user?.role == 'USER'">
                         <i-feather name="credit-card"></i-feather> 
-                        <span>{{ 100000 | currency:'Rp ' }}</span>
+                        <span>{{ balance | currency:'Rp ':'symbol':'3.0' }}</span>
                   </div>
             </div>
             <button mat-menu-item (click)="onLogout()">

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { CartService } from 'src/app/shared/services/cart.service';
+import { CartService } from '../../services/cart.service';
 import Swal from 'sweetalert2';
 
 @Component({

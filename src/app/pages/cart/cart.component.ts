@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CartService } from 'src/app/shared/services/cart.service';
+import { CartService } from './services/cart.service';
 import { TransactionService } from 'src/app/shared/services/transaction.service';
+import { UserService } from 'src/app/shared/services/user.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -14,13 +15,17 @@ export class CartComponent implements OnInit {
       subs: Subscription[] = [];
       carts: any = [];
       cartPrice: number = 0;
-      isEmpty: boolean = false;
       declineStocks: any = [];
-      translations?: any;
 
+      // state
+      isLoad: boolean = true;
+      isError: boolean = false;
+      isEmpty: boolean = false;
+      
       constructor(
             private cartService: CartService,
             private transactionService: TransactionService,
+            private userService: UserService,
             private router: Router
       ) { }
 
@@ -33,10 +38,13 @@ export class CartComponent implements OnInit {
       }
 
       getCarts() {
+            this.isLoad = true;
+
             const sub = this.cartService.getAll().subscribe({
                   next: (result) => {
                         this.carts = result.listCart;
                         this.cartPrice = result.totalPrice;
+                        this.isLoad = false;
                   },
                   error: (error) => {
                         const code = error.graphQLErrors[0].extensions.code;
@@ -55,6 +63,8 @@ export class CartComponent implements OnInit {
                               title: 'Failed to get carts',
                               text: error.message
                         });
+
+                        this.isLoad = false;
                   }
             });
 
@@ -96,7 +106,9 @@ export class CartComponent implements OnInit {
                                     icon: 'success',
                                     title: 'Horeyy',
                                     didClose: () => this.router.navigate(['/menu'])
-                              });  
+                              });
+
+                              this.userService.refreshBalance();
                         }
 
                         this.getCarts();
