@@ -1,6 +1,6 @@
 <nav class="nav">
       <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
-      <a class="nav-link" routerLink="/menu" routerLinkActive="active" *ngIf="user?.role == 'USER'">Menu</a>
+      <a class="nav-link" routerLink="/menu" routerLinkActive="active">Menu</a>
       <a class="nav-link" routerLink="/transaction" routerLinkActive="active" *ngIf="user">Transaction</a>
       <a class="nav-link" routerLink="/menu-management" routerLinkActive="active" *ngIf="user?.role == 'ADMIN'">Menu Management</a>
       <a class="nav-link" routerLink="/stock-management" routerLinkActive="active" *ngIf="user?.role == 'ADMIN'">Stock Management</a>
