@@ -1,0 +1,33 @@
+{
+      "auth": {
+            "back_btn_label": "kembali",
+            "login_heading": "Masuk",
+            "login_subheading": "Silahkan masuk untuk melanjutkan",
+            "register_heading": "Daftar",
+            "register_subheading": "Silahkan daftar untuk melanjutkan",
+            "reset_password_heading": "Reset Kata Sandi",
+            "reset_password_subheading": "Lupa kata sandi? tinggal reset aja",
+            "forgot_password": "Lupa kata sandi?",
+            "dont_have_account": "Belum punya akun?",
+            "have_account": "Sudah punya akun?",
+            "first_name_label": "name depan",
+            "first_name_required": "nama depan tidak boleh kosong!",
+            "last_name_label": "nama belakang",
+            "last_name_required": "nama belakang tidak boleh kosong!",
+            "question_label": "siapa nama hewan peliharaanmu?",
+            "answer_required": "jawaban tidak boleh kosong!",
+            "email_label": "email",
+            "email_required": "email tidak boleh kosong!",
+            "email_invalid": "email tidak valid!",
+            "password_label": "kata sandi",
+            "password_required": "kata sandi tidak boleh kosong",
+            "password_invalid": "kata sandi min 8 karater!"
+      },
+      "nav": {
+            "home": "Beranda",
+            "menu": "Menu",
+            "transaction": "Transaksi",
+            "menu_management": "Menu manajemen",
+            "stock_management": "Stok manajemen"
+      }
+}

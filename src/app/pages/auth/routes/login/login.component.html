@@ -1,33 +1,42 @@
 <div class="container">
-      <h2 class="heading">Login</h2>
-      <h3 class="subheading">Please login to continue.</h3>
+      <h2 class="heading">{{ 'auth.login_heading' | translate }}</h2>
+      <h3 class="subheading">{{ 'auth.login_subheading' | translate }}</h3>
 
       <form class="form" [formGroup]="form">
             <mat-form-field class="form-field" floatLabel="always">
-                  <mat-label>email</mat-label>
+                  <mat-label>{{ 'auth.email_label' | translate }}</mat-label>
                   <input matInput type="email" formControlName="email">
-                  <mat-error *ngIf="emailControl?.touched && emailControl?.errors?.['email']">invalid email address!</mat-error>
-                  <mat-error *ngIf="emailControl?.touched && emailControl?.errors?.['required']">email is required!</mat-error>
+                  <mat-error *ngIf="emailControl?.touched && emailControl?.errors?.['email']">
+                        {{ 'auth.email_invalid' | translate }}
+                  </mat-error>
+                  <mat-error *ngIf="emailControl?.touched && emailControl?.errors?.['required']">
+                        {{ 'auth.email_required' | translate }}
+                  </mat-error>
             </mat-form-field>
       
             <mat-form-field class="form-field" floatLabel="always" class="password-field">
-                  <mat-label>password</mat-label>
+                  <mat-label>{{ 'auth.password_label' | translate }}</mat-label>
                   <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
                   <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
                         <i-feather [name]="hidePassword ? 'eye' : 'eye-off'"></i-feather>
                   </button>
-                  <mat-error *ngIf="passwordControl?.touched && passwordControl?.errors?.['required']">password is required!</mat-error>
+                  <mat-error *ngIf="passwordControl?.touched && passwordControl?.errors?.['required']">
+                        {{ 'auth.password_required' | translate }}
+                  </mat-error>
             </mat-form-field>      
 
-            <a class="reset-link" routerLink="/auth/reset-password">Forgot your password?</a>
+            <a class="reset-link" routerLink="/auth/reset-password">
+                  {{ 'auth.forgot_password' | translate }}
+            </a>
 
             <button class="form-submit" type="submit" mat-flat-button color="primary" (click)="onSubmit()" [disabled]="inProgress">
                   <app-spinbar *ngIf="inProgress"></app-spinbar>
-                  <span *ngIf="!inProgress">Login</span>
+                  <span *ngIf="!inProgress">{{ 'auth.login_heading' | translate }}</span>
             </button>
       </form>
 
       <div class="redirect-link">
-            Don't have account yet? <a routerLink="/auth/register">Register</a>
+            {{ 'auth.dont_have_account' | translate }} 
+            <a routerLink="/auth/register">{{ 'auth.register_heading' | translate }}</a>
       </div>
 </div>

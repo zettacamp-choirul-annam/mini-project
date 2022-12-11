@@ -1,0 +1,33 @@
+{
+      "auth": {
+            "back_btn_label": "back",
+            "login_heading": "Login",
+            "login_subheading": "Please login to continue",
+            "register_heading": "Register",
+            "register_subheading": "Please register to continue",
+            "reset_password_heading": "Reset Password",
+            "reset_password_subheading": "Forgot your password? just reset it",
+            "forgot_password": "Forgot your password?",
+            "dont_have_account": "Don't have account yet?",
+            "have_account": "Already have an account?",
+            "first_name_label": "first name",
+            "first_name_required": "first name is required!",
+            "last_name_label": "last name",
+            "last_name_required": "last name is required!",
+            "question_label": "what is your pet's name?",
+            "answer_required": "answer is required!",
+            "email_label": "email",
+            "email_required": "email is required!",
+            "email_invalid": "invalid email address!",
+            "password_label": "password",
+            "password_required": "password is required!",
+            "password_invalid": "password min 8 chars!"
+      },
+      "nav": {
+            "home": "Home",
+            "menu": "Menu",
+            "transaction": "Transaction",
+            "menu_management": "Menu management",
+            "stock_management": "Stock management"
+      }
+}

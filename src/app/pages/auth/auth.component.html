@@ -6,8 +6,9 @@
             <div class="content-head">
                   <button class="content-back" (click)="goBack()">
                         <i-feather name="chevron-left"></i-feather>
-                        <span>back</span>
+                        <span>{{ 'auth.back_btn_label' | translate }}</span>
                   </button>
+                  <app-lang-switch></app-lang-switch>
             </div>
             <div class="content-body">
                   <router-outlet></router-outlet>
