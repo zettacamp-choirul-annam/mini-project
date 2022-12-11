@@ -23,6 +23,8 @@
       gap: 30px;
 }
 
-.menu-card {
+.menu-card,
+.container::ng-deep .skeleton-loader {
       width: calc((100% / 3) - 30px);
+      min-height: 500px;
 }

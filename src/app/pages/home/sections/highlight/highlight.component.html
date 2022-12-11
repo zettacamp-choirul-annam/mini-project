@@ -2,7 +2,15 @@
       <h2 class="heading">Our Popular Menu</h2>
       <h3 class="subheading">Present from the menu that most people like</h3>
 
-      <div class="content">
-            <app-menu-card class="menu-card" *ngFor="let menu of menus" [menu]="menu" [showFavorite]="false"></app-menu-card>
+      <ngx-skeleton-loader class="content" count="3" animation="progress" *ngIf="isLoad"></ngx-skeleton-loader>
+
+      <div class="content" *ngIf="!isLoad">
+            <app-menu-card 
+                  class="menu-card" 
+                  *ngFor="let menu of menus" 
+                  [menu]="menu" 
+                  [showFavorite]="false"
+                  (_order)="goToMenu(menu._id)">
+            </app-menu-card>
       </div>
 </div>
