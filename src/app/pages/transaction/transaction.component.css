@@ -89,3 +89,20 @@
       font-size: 0.8rem;
       opacity: 0.75;
 }
+
+.card-container::ng-deep .skeleton-loader {
+      width: 100%;
+      height: 300px;
+      margin-bottom: 20px;
+      padding: 20px;
+      border-radius: 20px;
+}
+
+.mat-paginator {
+      margin-top: 40px;
+}
+
+/* hide paginatior page size */
+.mat-paginator::ng-deep .mat-paginator-page-size {
+      display: none;
+}
