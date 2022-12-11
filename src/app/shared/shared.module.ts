@@ -8,10 +8,12 @@ import { ContentComponent } from './components/content/content.component';
 import { SpinbarComponent } from './components/spinbar/spinbar.component';
 import { MenuCardComponent } from './components/menu-card/menu-card.component';
 import { QuantityInputComponent } from './components/quantity-input/quantity-input.component';
+import { LangSwitchComponent } from './components/lang-switch/lang-switch.component';
 
 import { MaterialsModule } from './modules/materials.module';
 import { IconsModule } from './modules/icons.module';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
       declarations: [
@@ -21,13 +23,15 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
             SpinbarComponent,
             MenuCardComponent,
             QuantityInputComponent,
+            LangSwitchComponent,
             ContainerComponent,
       ],
       imports: [
             CommonModule,
             MaterialsModule,
             IconsModule,
-            NgxSkeletonLoaderModule
+            NgxSkeletonLoaderModule,
+            TranslateModule
       ],
       exports: [
             ContainerComponent,
@@ -37,10 +41,12 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
             SpinbarComponent,
             MenuCardComponent,
             QuantityInputComponent,
+            LangSwitchComponent,
             
             MaterialsModule,
             IconsModule,
-            NgxSkeletonLoaderModule
+            NgxSkeletonLoaderModule,
+            TranslateModule
       ]
 })
 export class SharedModule { }

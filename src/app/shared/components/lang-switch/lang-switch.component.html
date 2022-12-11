@@ -1,0 +1,7 @@
+<mat-form-field class="lang-switch">
+      <i-feather class="lang-switch-icon" name="globe" matPrefix></i-feather>
+      <mat-label></mat-label>
+      <mat-select [value]="currentLang" (valueChange)="switchLanguage($event)">
+            <mat-option *ngFor="let lang of langs" [value]="lang">{{ lang | uppercase }}</mat-option>
+      </mat-select>
+</mat-form-field>
