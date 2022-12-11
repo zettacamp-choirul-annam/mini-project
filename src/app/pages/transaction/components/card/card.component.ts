@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 
@@ -11,6 +11,7 @@ export class CardComponent implements OnInit {
       @Input() transaction: any;
       @Input() role: any;
       @Input() transId: string = '';
+      @Output() _rate = new EventEmitter();
       
       status: string = '';
       isSuccess: boolean = false;
@@ -36,10 +37,5 @@ export class CardComponent implements OnInit {
             });
       }
 
-      openDialog() {
-            this.dialog.open(DialogComponent, {
-                  data: { menus: this.menus, transId: this.transId },
-                  width: '600px'
-            });
-      }
+      onRate() { this._rate.emit({ menus: this.menus, transId: this.transId }) }
 }

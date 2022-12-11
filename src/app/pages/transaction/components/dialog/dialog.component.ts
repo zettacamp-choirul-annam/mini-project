@@ -12,6 +12,7 @@ export class DialogComponent implements OnInit {
       ratings: any = {};
       menus: any;
       transId: any;
+      isLoad: boolean = false;
 
       get ratedLength() {
             return Object.keys(this.ratings).length;
@@ -33,8 +34,6 @@ export class DialogComponent implements OnInit {
       }
 
       onSubmit() {
-            this.dialogRef.close();
-
             const data = Object.entries(this.ratings).map((item: any) => {                  
                   return {
                         rating_value: item[1].star,
@@ -44,8 +43,13 @@ export class DialogComponent implements OnInit {
                   };
             });
 
+            this.isLoad = true;
+
             this.ratingService.create(data).subscribe({
                   next: (result) => {
+                        this.isLoad = false;
+                        this.dialogRef.close(true);
+
                         Swal.fire({
                               icon: 'success',
                               title: 'Hello world',
@@ -53,6 +57,9 @@ export class DialogComponent implements OnInit {
                         });
                   },
                   error: (error) => {
+                        this.isLoad = false;
+                        this.dialogRef.close(false);
+
                         Swal.fire({
                               icon: 'error',
                               title: 'Failed to rate order!',

@@ -6,7 +6,7 @@
             </div>
             <!-- <div class="card-status" [ngClass]="{ success: isSuccess }">{{ status }}</div> -->
             <div class="card-date">{{ transaction.order_date }}</div>
-            <button mat-flat-button color="primary" class="card-rate" *ngIf="role != 'ADMIN'" [disabled]="isRated" (click)="openDialog()">Rate order</button>
+            <button mat-flat-button color="primary" class="card-rate" *ngIf="role != 'ADMIN'" [disabled]="isRated" (click)="onRate()">Rate order</button>
       </div>
       <div class="card-body">
             <div class="card-menu" *ngFor="let menu of menus">

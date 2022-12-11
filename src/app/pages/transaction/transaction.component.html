@@ -5,7 +5,10 @@
                   <div class="tab-item" [ngClass]="{ active: currentTab == 'ratings' }" (click)="switchTab('ratings')">Ratings</div>
             </div>
       </div>
-      <div class="content">
+
+      <ngx-skeleton-loader class="card-container" count="3" animation="progress" *ngIf="isLoad"></ngx-skeleton-loader>
+
+      <div class="content" *ngIf="!isLoad">
             <div *ngIf="currentTab == 'history'; then history_template else rating_template"></div>
       </div>
 </div>
@@ -15,13 +18,15 @@
             <app-card 
                   *ngFor="let transaction of transactions" [transaction]="transaction" 
                   [role]="role"
-                  [transId]="transaction._id">
+                  [transId]="transaction._id"
+                  (_rate)="onRate($event)">
             </app-card>
       </div>
-      <mat-paginator [length]="100"
-            [pageSize]="10"
-            [pageSizeOptions]="[5, 10, 25, 100]"
-            aria-label="Select page">
+      <mat-paginator 
+            (page)="onPaginatorChange($event)" 
+            [pageIndex]="pagination.page" 
+            [pageSize]="pagination.limit" 
+            [length]="pagination.total">
       </mat-paginator>
 </ng-template>
 

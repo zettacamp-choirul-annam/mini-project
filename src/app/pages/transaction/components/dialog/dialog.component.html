@@ -6,5 +6,11 @@
 </div>
 <div class="mat-dialog-foot" mat-dialog-actions align="end">
       <button mat-button mat-dialog-close>cancel</button>
-      <button mat-flat-button color="primary" matRipple [disabled]="ratedLength < data.menus.length" (click)="onSubmit()">rate</button>
+      <button 
+            mat-flat-button color="primary" 
+            matRipple [disabled]="(ratedLength < data.menus.length) || isLoad" 
+            (click)="onSubmit()">
+            <span *ngIf="!isLoad">rate</span>
+            <app-spinbar *ngIf="isLoad"></app-spinbar>
+      </button>
 </div>
