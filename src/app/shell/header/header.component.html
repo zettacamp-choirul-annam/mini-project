@@ -3,8 +3,15 @@
       
       <app-nav [user]="user"></app-nav>
       <app-cart *ngIf="user?.role == 'USER'"></app-cart>
+      
+      <app-lang-switch></app-lang-switch>
+
       <app-profile *ngIf="user" [user]="user" (_logout)="onLogout()"></app-profile>
       
-      <a mat-flat-button routerLink="/auth/register" *ngIf="!user">Register</a>
-      <a mat-flat-button color="primary" routerLink="/auth/login" *ngIf="!user">Login</a>
+      <a mat-flat-button routerLink="/auth/register" *ngIf="!user">
+            {{ 'auth.register_heading' | translate }}
+      </a>
+      <a mat-flat-button color="primary" routerLink="/auth/login" *ngIf="!user">
+            {{ 'auth.login_heading' | translate }}
+      </a>
 </header>
