@@ -7,10 +7,11 @@ import { ContentComponent } from './components/content/content.component';
 
 import { SpinbarComponent } from './components/spinbar/spinbar.component';
 import { MenuCardComponent } from './components/menu-card/menu-card.component';
+import { QuantityInputComponent } from './components/quantity-input/quantity-input.component';
 
 import { MaterialsModule } from './modules/materials.module';
 import { IconsModule } from './modules/icons.module';
-import { QuantityInputComponent } from './components/quantity-input/quantity-input.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
       declarations: [
@@ -25,7 +26,8 @@ import { QuantityInputComponent } from './components/quantity-input/quantity-inp
       imports: [
             CommonModule,
             MaterialsModule,
-            IconsModule
+            IconsModule,
+            NgxSkeletonLoaderModule
       ],
       exports: [
             ContainerComponent,
@@ -37,7 +39,8 @@ import { QuantityInputComponent } from './components/quantity-input/quantity-inp
             QuantityInputComponent,
             
             MaterialsModule,
-            IconsModule
+            IconsModule,
+            NgxSkeletonLoaderModule
       ]
 })
 export class SharedModule { }
