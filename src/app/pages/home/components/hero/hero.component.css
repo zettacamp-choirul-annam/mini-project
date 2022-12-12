@@ -16,6 +16,7 @@
 .subheading {
       font-weight: 400;
       line-height: 1.75;
+      max-width: 70%;
       opacity: 0.65;
 }
 

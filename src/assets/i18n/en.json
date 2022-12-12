@@ -27,6 +27,24 @@
             "password_required": "password is required!",
             "password_invalid": "password min 8 chars!"
       },
+      "home": {
+            "hero": {
+                  "heading": "A taste you'll remember.",
+                  "subheading": "Because no great story started with salad."
+            },
+            "offers": {
+                  "heading": "Special Offers",
+                  "subheading": "Get special offers discount now!"
+            },
+            "highlight": {
+                  "heading": "Our Popular Menu",
+                  "subheading": "Present from the menu that most people like"
+            },
+            "about": {
+                  "heading": "It Takes About 60 Years To Cook The Perfect Steak",
+                  "paragraph": "At BEEF!, our brand has always meant something special. Because on the ranch, a brand is what differentiates you from your neighbors. It's a physical example of what sets you apart from the others in the herd. And at BEEF!, we take that to heart. For almost 60 years, BEEF! has been the best at what it does. And like that first match on the grill every evening... we're just getting started!"
+            }
+      },
       "nav": {
             "home": "Home",
             "menu": "Menu",

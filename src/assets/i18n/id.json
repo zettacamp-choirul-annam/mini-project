@@ -27,6 +27,24 @@
             "password_required": "kata sandi tidak boleh kosong",
             "password_invalid": "kata sandi min 8 karater!"
       },
+      "home": {
+            "hero": {
+                  "heading": "Sebuah rasa yang akan anda ingat.",
+                  "subheading": "Karena tidak ada kisah hebat yang dimulai dengan salad."
+            },
+            "offers": {
+                  "heading": "Penawaran Khusus",
+                  "subheading": "Dapatkan diskon penawaran khusus sekarang!"
+            },
+            "highlight": {
+                  "heading": "Menu Populer Kami",
+                  "subheading": "Hadir dari menu yang disukai banyak orang"
+            },
+            "about": {
+                  "heading": "Dibutuhkan Sekitar 60 Tahun Untuk Memasak Steak Yang Sempurna",
+                  "paragraph": "Di BEEF!, merek kami selalu berarti sesuatu yang istimewa. Karena di peternakan, mereklah yang membedakan anda dari tetangga anda. Ini adalah contoh fisik dari apa yang membedakan anda dari yang lain dalam kawanan. Dan di BEEF!, kami mencamkannya. Selama hampir 60 tahun, BEEF! telah menjadi yang terbaik dalam apa yang dilakukannya. Dan seperti pertandingan pertama di atas panggangan setiap malam... kita baru saja mulai!"
+            }
+      },
       "nav": {
             "home": "Beranda",
             "menu": "Menu",
