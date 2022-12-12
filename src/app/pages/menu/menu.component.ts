@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MenuService } from '../menu-management/services/menu.service';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
