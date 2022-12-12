@@ -3,16 +3,16 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { HeaderComponent } from './header.component';
-import { NavComponent } from './components/nav/nav.component';
-import { ProfileComponent } from './components/profile/profile.component';
-import { CartComponent } from './components/cart/cart.component';
+import { HeaderNavComponent } from './components/header-nav/header-nav.component';
+import { HeaderCartComponent } from './components/header-cart/header-cart.component';
+import { HeaderProfileComponent } from './components/header-profile/header-profile.component';
 
 @NgModule({
       declarations: [
             HeaderComponent,
-            NavComponent,
-            ProfileComponent,
-            CartComponent
+            HeaderNavComponent,
+            HeaderCartComponent,
+            HeaderProfileComponent
       ],
       imports: [
             CommonModule,

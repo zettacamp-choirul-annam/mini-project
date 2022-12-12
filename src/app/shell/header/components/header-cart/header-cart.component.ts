@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { CartService } from 'src/app/services/cart.service';
+import { Subscription } from 'rxjs';
 
 @Component({
-      selector: 'app-cart',
-      templateUrl: './cart.component.html',
-      styleUrls: ['./cart.component.css']
+      selector: 'app-header-cart',
+      templateUrl: './header-cart.component.html',
+      styleUrls: ['./header-cart.component.css']
 })
-export class CartComponent implements OnInit {
+export class HeaderCartComponent implements OnInit {
       sub!: Subscription;
       total: number = 0;
 

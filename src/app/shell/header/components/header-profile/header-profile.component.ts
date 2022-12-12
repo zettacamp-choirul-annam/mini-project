@@ -1,16 +1,16 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/shared/services/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
-      selector: 'app-profile',
-      templateUrl: './profile.component.html',
-      styleUrls: ['./profile.component.css']
+      selector: 'app-header-profile',
+      templateUrl: './header-profile.component.html',
+      styleUrls: ['./header-profile.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class HeaderProfileComponent implements OnInit {
       @Input() user: any;
       @Output() _logout = new EventEmitter();
-      
+
       sub!: Subscription;
       balance: number = 0;
 
@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
                   this.balance = balance;
             });
       }
-      
+
       ngOnDestroy() {
             this.sub.unsubscribe();
       }

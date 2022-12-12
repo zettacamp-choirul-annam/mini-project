@@ -1,13 +1,19 @@
 <header class="header">
       <h1 class="header-title">BEEF!</h1>
-      
-      <app-nav [user]="user"></app-nav>
-      
-      <app-cart></app-cart>
+
+      <!-- navigation bar -->
+      <app-header-nav [user]="user"></app-header-nav>
+
+      <!-- cart button with badge -->
+      <app-header-cart></app-header-cart>
+
+      <!-- language switcher -->
       <app-lang-switch></app-lang-switch>
 
-      <app-profile *ngIf="user" [user]="user" (_logout)="onLogout()"></app-profile>
+      <!-- profile menu -->
+      <app-header-profile *ngIf="user" [user]="user" (_logout)="onLogout()"></app-header-profile>
       
+      <!-- auth button -->
       <a mat-flat-button routerLink="/auth/register" *ngIf="!user">
             {{ 'auth.register_heading' | translate }}
       </a>
