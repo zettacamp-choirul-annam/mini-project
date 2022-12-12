@@ -26,20 +26,20 @@ export class DialogComponent implements OnInit {
 
       ngOnInit(): void {
             this.menus = this.data.menus;
-            this.transId = this.data.transId;
+            this.transId = this.data.transId;            
       }
 
       onRate(data: any) {
-            this.ratings[data._id] = data;
+            this.ratings[data.recipe_id] = data;
       }
 
       onSubmit() {
-            const data = Object.entries(this.ratings).map((item: any) => {                  
+            const data = Object.entries(this.ratings).map(([key, value]: any) => {         
                   return {
-                        rating_value: item[1].star,
-                        review: item[1].review,
+                        rating_value: value.star,
+                        review: value.review,
                         transaction_id: this.transId,
-                        recipe_id: item[1]._id
+                        recipe_id: value.recipe_id
                   };
             });
 
