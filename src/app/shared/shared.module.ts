@@ -10,7 +10,6 @@ import { MenuCardComponent } from './components/menu-card/menu-card.component';
 import { QuantityInputComponent } from './components/quantity-input/quantity-input.component';
 import { LangSwitchComponent } from './components/lang-switch/lang-switch.component';
 import { TabComponent } from './components/tab/tab.component';
-import { SearchComponent } from './components/search/search.component';
 
 import { MaterialsModule } from './modules/materials.module';
 import { IconsModule } from './modules/icons.module';
@@ -28,8 +27,7 @@ import { TranslateModule } from '@ngx-translate/core';
             MenuCardComponent,
             QuantityInputComponent,
             LangSwitchComponent,
-            TabComponent,
-            SearchComponent,
+            TabComponent
       ],
       imports: [
             CommonModule,
@@ -48,7 +46,6 @@ import { TranslateModule } from '@ngx-translate/core';
             QuantityInputComponent,
             LangSwitchComponent,
             TabComponent,
-            SearchComponent,
             
             MaterialsModule,
             IconsModule,

@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
-import { CartLocalService } from './cart-local.service';
-import { AuthService } from './auth.service';
 import { BehaviorSubject, map } from 'rxjs'
 
 @Injectable({
@@ -13,23 +11,11 @@ export class CartService {
 
       isLogedIn: boolean = false;
 
-      constructor(
-            private apollo: Apollo,
-            private cartLocalService: CartLocalService,
-            private authService: AuthService
-      ) {
-            this.isLogedIn = this.authService.getUser() != null;
+      constructor(private apollo: Apollo) {
             this.refrestTotal();
       }
 
       refrestTotal() {
-            // if the user is not logged in fetch data from local
-            if (!this.isLogedIn) {
-                  const result = this.cartLocalService.getCart();
-                  this.total.next(result.total); return;
-            }
-
-            // otherwise it will fetch from backend
             const sub: any = this.getAll({ page: 0, limit: 999999999 }).subscribe({
                   next: (result) => {
                         this.total.next(result.total);
@@ -128,7 +114,10 @@ export class CartService {
             });
 
             return response.pipe(
-                  map((result: any) => result.data.createCart)
+                  map((result: any) => {
+                        this.refrestTotal(); // refresh total carts
+                        return result.data.createCart;
+                  })
             );
       }
 
@@ -160,7 +149,10 @@ export class CartService {
             });
 
             return response.pipe(
-                  map((result: any) => result.data.deleteCart)
+                  map((result: any) => {
+                        this.refrestTotal(); // refresh total carts
+                        return result.data.deleteCart;
+                  })
             );
       }
 }

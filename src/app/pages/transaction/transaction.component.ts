@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { TransactionService } from 'src/app/shared/services/transaction.service';
 import { RatingService } from 'src/app/shared/services/rating.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { Subscription } from 'rxjs';
-import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
       selector: 'app-transaction',

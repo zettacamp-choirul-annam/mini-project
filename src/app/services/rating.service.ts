@@ -11,7 +11,7 @@ export class RatingService {
       getAll(filters?: any) {
             const query = `
                   query ($page: Int!, $limit: Int!, $menu_id: ID) {
-                        getAllRatings(page: $page, limit: $limit, menu_id: $recipeId) {
+                        getAllRatings(page: $page, limit: $limit, recipe_id: $menu_id) {
                               total
                               listRating {
                                     _id

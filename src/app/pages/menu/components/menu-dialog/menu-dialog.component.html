@@ -1,6 +1,10 @@
 <div class="mat-dialog-head">
-      <h1 class="mat-dialog-title">Order Menu</h1>
-      <button mat-button mat-dialog-close>cancel</button>
+      <h1 class="mat-dialog-title">
+            {{ 'menu.order_menu' | translate }}
+      </h1>
+      <button mat-button mat-dialog-close>
+            {{ 'menu.cancel' | translate }}
+      </button>
 </div>
 
 <div class="mat-dialog-body" mat-dialog-content>
@@ -11,15 +15,16 @@
             <div class="menu-info">
                   <div class="menu-rating">{{ menu.avg_rating }} <i-feather name="star"></i-feather></div>
                   <div class="menu-price">
-                        <span *ngIf="isDiscount">{{ menu.price_after_discount | currency:'Rp ':'symbol':'3.0' }}</span>
+                        <span>{{ menu.price_after_discount | currency:'Rp ':'symbol':'3.0' }}</span>
                         <sup  *ngIf="isDiscount">{{ menu.price | currency:'Rp ':'symbol':'3.0' }}</sup>
-                        <span *ngIf="!isDiscount">{{ menu.price | currency:'Rp ':'symbol':'3.0' }}</span>
                   </div>
             </div>
 
             <div class="menu-description">{{ menu.description }}</div>
 
-            <div class="menu-title">Ingredients</div>
+            <div class="menu-section">
+                  {{ 'menu.ingredients' | translate }}
+            </div>
 
             <ul class="menu-ingredient">
                   <li class="menu-ingredient-item" *ngFor="let ingredient of ingredients">
@@ -27,20 +32,31 @@
                   </li>
             </ul>
 
-            <div class="menu-title">Reviews</div>
+            <div class="menu-section">
+                  {{ 'menu.reviews' | translate }}
+            </div>
 
             <div class="menu-review">
+                  <div class="menu-review-error" *ngIf="isRatingError">
+                        {{ 'menu.review_error' | translate }}
+                  </div>
+                  <div class="menu-review-error" *ngIf="isRatingEmpty">
+                        {{ 'menu.review_empty' | translate }}
+                  </div>
+
                   <div class="menu-review-item" *ngFor="let rating of ratings">
                         <div class="menu-review-profile">
-                              <img class="menu-review-profile-picture" src="https://mini-project-annam.vercel.app/assets/images/background-2.jpg" alt="">
+                              <img class="menu-review-profile-picture" src="../../../../../assets/images/menu/menu-1.png" alt="">
                               <div class="menu-review-profile-name">{{ rating.user_id.first_name + ' ' + rating.user_id.last_name }}</div>
                         </div>
+
                         <div class="menu-review-info">
                               <div class="menu-review-star">
                                     <i-feather name="star" *ngFor="let i of [1, 2, 3, 4, 5]" [ngClass]="{ active: rating.rating_value >= i }"></i-feather>
                               </div>
                               <div class="menu-review-date">{{ rating.rating_date }}</div>
                         </div>
+
                         <div class="menu-review-message">{{ rating.review }}</div>
                   </div>
             </div>
@@ -49,5 +65,7 @@
 
 <div class="mat-dialog-foot" mat-dialog-actions align="end">
       <app-quantity-input class="menu-quantity" [min]="1" [max]="menu.availableStock" #quantity></app-quantity-input>
-      <button mat-flat-button color="primary" cdkFocusInitial (click)="addToCart(quantity.value, menu)">Add to cart</button>
+      <button class="menu-order" mat-flat-button color="primary" cdkFocusInitial (click)="addToCart(quantity.value)">
+            {{ 'menu.add_to_cart' | translate }}
+      </button>
 </div>

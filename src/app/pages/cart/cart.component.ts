@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
-import { CartLocalService } from 'src/app/services/cart-local.service';
-import { UserService } from 'src/app/shared/services/user.service';
-import { AuthService } from 'src/app/services/auth.service';
 import { TransactionService } from 'src/app/services/transaction.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -15,13 +12,12 @@ import Swal from 'sweetalert2';
 })
 export class CartComponent implements OnInit {
       subs: Subscription[] = [];
-      user: any;
       carts: any = [];
-      cartPrice: number = 0;
-      declineStocks: any = [];
+      totalPrice: number = 0;
+      outStocks : any = [];
 
       // state
-      isLoad: boolean = true;
+      isLoad : boolean = true;
       isError: boolean = false;
       isEmpty: boolean = false;
 
@@ -29,15 +25,11 @@ export class CartComponent implements OnInit {
       
       constructor(
             private cartService: CartService,
-            private cartLocalService: CartLocalService,
             private transactionService: TransactionService,
-            private userService: UserService,
-            private authService: AuthService,
             private router: Router
       ) { }
 
       ngOnInit(): void {
-            this.user = this.authService.getUser();
             this.getCarts();
       }
 
@@ -46,38 +38,30 @@ export class CartComponent implements OnInit {
       }
 
       getCarts() {
-            if (!this.user) {
-                  const result = this.cartLocalService.getCart();
+            // this.isLoad  = true;
+            this.isError = false;
+            this.isEmpty = false;
 
-                  this.carts = result.listCart;
-                  this.cartPrice = result.totalPrice;
-                  this.isLoad = false; return;
-            }
-            
             const sub = this.cartService.getAll().subscribe({
                   next: (result) => {
                         this.carts = result.listCart;
-                        this.cartPrice = result.totalPrice;
+                        this.totalPrice = result.totalPrice;
                         this.isLoad = false;
                   },
                   error: (error) => {
-                        this.isLoad = false;
                         const code = error.graphQLErrors[0].extensions.code;
                   
                         if (code == 'cart/cart-not-found') {
                               this.carts = [];
-                              this.cartPrice = 0;
+                              this.totalPrice = 0;
                               this.isEmpty = true;
-                              this.declineStocks = [];
-
-                              return;
+                              this.outStocks = [];
                         }
-                        
-                        Swal.fire({
-                              icon: 'error',
-                              title: 'Failed to get carts',
-                              text: error.message
-                        });
+
+                        this.isError = code == undefined;
+                        this.isLoad  = false;
+
+                        console.error(error.message);
                   }
             });
 
@@ -85,18 +69,6 @@ export class CartComponent implements OnInit {
       }
 
       async checkout() {
-            if (!this.user) {
-                  Swal.fire({
-                        icon: 'info',
-                        title: 'Login',
-                        text: 'Please login to continue your order',
-                        confirmButtonText: 'Login',
-                        showCancelButton: true,
-                        cancelButtonText: 'Cancel',
-                        preConfirm: () => { this.router.navigate(['/auth/login']) }
-                  }); return;
-            }
-
             const confirm = await Swal.fire({
                   icon: 'question',
                   title: 'Do you want to checkout',
@@ -123,44 +95,45 @@ export class CartComponent implements OnInit {
             
             const payload = {
                   menus: carts,
-                  total: this.cartPrice
+                  total: this.totalPrice
             };
 
             const sub = this.transactionService.create(payload).subscribe({
                   next: (result) => {
-                        const { order_status, DeclineRecipe } = result;
+                        const { order_status, decline_recipe, is_stock, is_balance } = result;
                         const isSuccess = order_status == 'SUCCESS';
                         
                         if (!isSuccess) {
-                              this.declineStocks = DeclineRecipe
+                              this.outStocks = decline_recipe
                                     .filter((item: any) => !item.isStock)
                                     .map((item: any) => item.recipe_id);
+
+                              let message = '';
+
+                              if (!is_stock) message = 'Out of stock';
+                              if (!is_balance) message = 'The balance is not enough or it has been used up'
                                     
-                              Swal.fire({
-                                    icon: 'error',
-                                    title: 'Out of stock'
-                              });
+                              Swal.fire({ icon: 'error', title: 'Failed to chekout', text: message });
                         }
 
                         if (isSuccess) {
                               Swal.fire({
                                     icon: 'success',
-                                    title: 'Horeyy',
+                                    title: 'Our kitchen is on fire',
+                                    text: 'Please wait and enjoy',
                                     didClose: () => this.router.navigate(['/menu'])
                               });
-
-                              this.userService.refreshBalance();
                         }
 
                         this.getCarts();
-                        this.cartService.refrestTotal();
                   },
                   error: (error) => {
                         Swal.fire({
                               icon: 'error',
-                              title: 'Checkout Failed',
-                              text: error.message
+                              title: 'Failed to checkout ',
                         });
+
+                        console.error(error.message);
                   }
             });
 

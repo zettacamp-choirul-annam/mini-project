@@ -61,5 +61,25 @@
             "open_hours": "Jam Buka",
             "quick_links": "Tautan Langsung",
             "follow_us": "Ikuti Kami"
+      },
+      "menu": {
+            "order": "Pesan",
+            "order_menu": "Pesan Menu",
+            "out_of_stock": "Stok habis",
+            "discover": "Semua menu",
+            "favorite": "Favorit",
+            "ingredients": "Bahan",
+            "reviews": "Ulasan",
+            "review_error": "Gagal memuat ulasan",
+            "review_empty": "Belum ada ulasan",
+            "menu_empty": "Menu tidak ditemukan",
+            "menu_error": "Gagal memuat menu",
+            "cancel": "Batal",
+            "add_to_cart": "Masukkan ke keranjang"
+      },
+      "cart": {
+            "cart_empty": "Kerangjang kosong",
+            "cart_error": "Gagal memuat keranjang",
+            "go_to_menu": "Silahkan pilih menu"
       }
 }

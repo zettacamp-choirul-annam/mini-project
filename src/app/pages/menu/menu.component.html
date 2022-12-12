@@ -1,20 +1,32 @@
 <div class="container">
       <div class="toolbar">
-            <div class="tab" *ngIf="isLogedIn">
-                  <div class="tab-item" [ngClass]="{ active: currentTab == 'discover' }" (click)="switchTab('discover')">Discover</div>
-                  <div class="tab-item" [ngClass]="{ active: currentTab == 'favorite' }" (click)="switchTab('favorite')">Favorite</div>
-            </div>
+            <app-tab class="tab" [labels]="tabLabels" (_change)="onTabChange($event)" *ngIf="isLogedIn"></app-tab>
+
             <div class="search">
                   <i-feather class="search-icon" name="search"></i-feather>
-                  <input class="search-input" type="search" #search (input)="onSearch(search.value)" placeholder="search menu here...">
+                  <input class="search-input" type="search" placeholder="Search menu..." #search (input)="onSearch(search.value)">
             </div>
       </div>
 
-      <ngx-skeleton-loader class="content" count="6" animation="progress" *ngIf="isLoad"></ngx-skeleton-loader>
-
-      <div class="content" *ngIf="!isLoad">
-            <app-menu-card 
-                  *ngFor="let menu of menus" [menu]="menu" [showFavorite]="isLogedIn" (_order)="openDialog(menu)">
-            </app-menu-card>
+      <div class="content">
+            <div *ngIf="isError || isEmpty; then state else card"></div>
       </div>
 </div>
+
+<ng-template #card>
+      <ngx-skeleton-loader class="loader" count="6" animation="progress" *ngIf="isLoad"></ngx-skeleton-loader>
+
+      <div class="card-container">
+            <app-menu-card class="card" *ngFor="let menu of menus" [menu]="menu" [showFavorite]="isLogedIn" (_order)="onOrder(menu)"></app-menu-card>
+      </div>
+</ng-template>
+
+<ng-template #state>
+      <div class="state">
+            <img class="state-image" src="../../../assets/images/empty.svg" alt="">
+            <div class="state-message">
+                  <span *ngIf="isEmpty">{{ 'menu.menu_empty' | translate }}</span>
+                  <span *ngIf="isError">{{ 'menu.menu_error' | translate }}</span>
+            </div>
+      </div>
+</ng-template>

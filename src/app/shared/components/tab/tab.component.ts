@@ -18,6 +18,6 @@ export class TabComponent implements OnInit {
 
       onChange(label: string) {
             this.activeTab = label;
-            this._change.emit(label);
+            this._change.emit(this.activeTab);
       }
 }

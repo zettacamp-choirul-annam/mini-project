@@ -1,11 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { MenuService } from '../menu-management/services/menu.service';
+import { MenuService } from 'src/app/services/menu.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { MenuDialogComponent } from './components/menu-dialog/menu-dialog.component';
 import { Subscription } from 'rxjs';
-import { DialogComponent } from './components/dialog/dialog.component';
-import Swal from 'sweetalert2';
 
 @Component({
       selector: 'app-menu',
@@ -17,95 +16,102 @@ export class MenuComponent implements OnInit {
 
       subs: Subscription[] = [];
       menus: any = [];
-      id: string | null = '';
-      isLogedIn: any;
-
-      // state
-      isLoad : boolean = true;
-      isError: boolean = false;
-
-      currentTab: string = 'discover';
+      tabLabels = ['Discover', 'Favorite'];
+      currentTab: string = '';
       searchTimeout: any = null;
+      searchValue: string = '';
+      isLogedIn: boolean = false;
+      
+      isError: boolean = false;
+      isLoad : boolean = false;
+      isEmpty: boolean = false;
 
       constructor(
             private menuService: MenuService,
             private authService: AuthService,
-            private route: ActivatedRoute,
             private router: Router,
+            private route: ActivatedRoute,
             private dialog: MatDialog
       ) { }
 
       ngOnInit(): void {
             this.isLogedIn = this.authService.getUser() != null;
-            this.id = this.route.snapshot.queryParamMap.get('id');
             this.getMenus();
       }
-      
+
       ngOnDestroy() {
             this.subs.forEach(sub => sub.unsubscribe());
       }
 
-      getMenus(filter?: any) {
-            this.isLoad = true;
+      getMenus() {
+            this.isError = false;
+            this.isLoad  = true;
+            this.isEmpty = false;
 
-            const sub = this.menuService[this.isLogedIn ? 'getAll' : 'getAllPublic'](filter).subscribe({
+            const filters = {
+                  is_favorite_page: this.currentTab == 'Favorite',
+                  recipe_name: this.searchValue
+            };
+
+            const sub = this.menuService.getAll(filters).subscribe({
                   next: (result) => {
                         this.menus = result.listRecipe;
-
-                        if (this.id) {
-                              const menu = this.menus.filter((item: any) => item._id == this.id)[0];
-                              this.openDialog(menu);
-
-                              // remove query param after dialog opened
-                              this.router.navigate([], { relativeTo: this.route, queryParams: { id: null }, queryParamsHandling: 'merge' });
-                              this.id = null;
-                        }
-
                         this.isLoad = false;
+
+                        this.linkHandler(); // auto open dialog
+
+                        if (this.menus.length == 0) this.isEmpty = true;
                   },
                   error: (error) => {
-                        console.log(error);
+                        const code = error.graphQLErrors[0]?.extensions?.code;
 
-                        this.isLoad = false;
-                        this.isError = true;
+                        this.isEmpty = code == 'recipe/recipe-not-found';
+                        this.isError = code == undefined;
+                        this.isLoad  = false;
+
+                        console.error(error.message);
                   }
             });
 
             this.subs.push(sub);
       }
 
-      getFavorites() {
-            this.getMenus({ is_favorite_page: true })
+      linkHandler() {
+            // get menu id from query params
+            const id = this.route.snapshot.queryParamMap.get('id');
+
+            if (!id) return; // stop execution
+
+            // get one menu based on id from the link
+            const menu = this.menus.filter((item: any) => item._id == id)[0];            
+
+            this.dialog.open(MenuDialogComponent, { 
+                  data: { menu, isLogedIn: this.isLogedIn }
+            });
+
+            // remove query param after dialog opened
+            this.router.navigate([], { relativeTo: this.route, queryParams: { id: null }, queryParamsHandling: 'merge' });
       }
 
-      openDialog(menu: any) {
-            this.dialog.open(DialogComponent, { data: { menu, isLogedIn: this.isLogedIn }, });
-      }
+      onTabChange(value: string) {
+            this.currentTab = value;
 
-      switchTab(name: string) {
             this.$search.nativeElement.value = '';
-            this.currentTab = name;
+            this.searchValue = '';
 
-            switch (name) {
-                  case 'discover':
-                        this.getMenus();
-                  break;
-                  case 'favorite':
-                        this.getFavorites();
-                  break;
-            }
+            this.getMenus();
       }
 
       onSearch(value: string) {
-            if (this.searchTimeout) {
-                  clearTimeout(this.searchTimeout);
-            }
+            clearTimeout(this.searchTimeout);
 
-            this.searchTimeout = setTimeout(() => {
-                  this.getMenus({ 
-                        recipe_name: value, 
-                        is_favorite_page: this.currentTab == 'favorite' 
-                  });
-            }, 250);
+            this.searchValue   = value;
+            this.searchTimeout = setTimeout(() => this.getMenus(), 250);
+      }
+
+      onOrder(menu: any) {
+            this.dialog.open(MenuDialogComponent, { 
+                  data: { menu, isLogedIn: this.isLogedIn }
+            });
       }
 }

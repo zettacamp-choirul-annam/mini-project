@@ -1,12 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
+import { UserService } from './user.service';
+import { CartService } from './cart.service';
 import { map } from 'rxjs'
 
 @Injectable({
       providedIn: 'root'
 })
 export class TransactionService {
-      constructor(private apollo: Apollo) { }
+      constructor(
+            private apollo: Apollo,
+            private userService: UserService,
+            private cartService: CartService
+      ) { }
 
       getAll(filters?: any) {
             const query = `
@@ -129,7 +135,11 @@ export class TransactionService {
             });
 
             return response.pipe(
-                  map((result: any) => result.data.createTransaction)
+                  map((result: any) => {
+                        this.userService.refreshBalance(); // refresh user balance
+                        this.cartService.refrestTotal(); // refresh cart total
+                        return result.data.createTransaction;
+                  })
             );
       }
 

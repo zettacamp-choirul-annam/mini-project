@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { forceValidate } from 'src/app/shared/utils/force-validate';
 import { AuthService } from 'src/app/services/auth.service';
-import { CartLocalService } from 'src/app/services/cart-local.service';
+import { SaveCartService } from 'src/app/services/save-cart.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
       constructor(
             private formBuilder: FormBuilder,
             private authService: AuthService,
-            private cartLocalService: CartLocalService,
+            private saveCartService: SaveCartService,
             private router: Router
       ) { }
 
@@ -55,7 +55,8 @@ export class LoginComponent implements OnInit {
                   next: () => {
                         this.inProgress = false;
                         this.router.navigate(['/home']).then(() => {
-                              this.cartLocalService.sendCart();
+                              // send saved cart to server
+                              this.saveCartService.send();
                         });
                   },    
                   error: (error) => {

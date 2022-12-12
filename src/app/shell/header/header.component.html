@@ -5,7 +5,7 @@
       <app-header-nav [user]="user"></app-header-nav>
 
       <!-- cart button with badge -->
-      <app-header-cart></app-header-cart>
+      <app-header-cart *ngIf="user?.role == 'USER'"></app-header-cart>
 
       <!-- language switcher -->
       <app-lang-switch></app-lang-switch>

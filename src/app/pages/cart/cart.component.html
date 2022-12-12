@@ -1,32 +1,36 @@
 <div class="container">
-      <ngx-skeleton-loader class="card-container" count="3" animation="progress" *ngIf="isLoad"></ngx-skeleton-loader>
+      <ngx-skeleton-loader class="loader" count="3" animation="progress" *ngIf="isLoad"></ngx-skeleton-loader>
 
       <div class="content">
-            <div *ngIf="isEmpty; then empty else content"></div>
-      </div>
-
-      <div class="toolbar">
-            <div class="total-price">Total: {{ cartPrice | currency:'Rp ':'symbol':'3.0' }}</div>
-            <button mat-flat-button color="primary" (click)="checkout()" [disabled]="isEmpty">checkout</button>
+            <div *ngIf="isEmpty; then state else content"></div>
       </div>
 </div>
 
-<ng-template #empty>
-      <div class="empty-container">
-            <img src="https://assets.epicurious.com/photos/580fa2a44eeca03265dbe5b9/1:1/w_1371,h_1371,c_limit/kitchen-fire-102516.jpg" alt="" class="empty-image">
-            <h2>Cart empty</h2>
-            <a class="empty-action" routerLink="/menu">go to menu</a>
+<ng-template #state>
+      <div class="state">
+            <img class="state-image" src="../../../assets/images/empty.svg" alt="">
+            <div class="state-message">
+                  <span *ngIf="isEmpty">
+                        {{ 'cart.cart_empty' | translate }} <br> <a routerLink="/menu">{{ 'cart.go_to_menu' | translate }}</a>
+                  </span>
+                  <span *ngIf="isError">
+                        {{ 'cart.cart_error' | translate }}
+                  </span>
+            </div>
       </div>
 </ng-template>
 
 <ng-template #content>
       <div class="card-container">
-            <app-card class="card" 
-                  *ngFor="let cart of carts" [cart]="cart" 
-                  (_deleted)="getCarts()" 
-                  (_updated)="getCarts()"
-                  [user]="user"
-                  [oos]="declineStocks.includes(cart.recipe_id._id)"
-            ></app-card>
+            <app-cart-card class="card" 
+                  *ngFor="let cart of carts" 
+                  [cart]="cart" 
+                  [outStocks]="outStocks" 
+                  (_change)="getCarts()">
+            </app-cart-card>
+      </div>
+      <div class="toolbar">
+            <h3 class="total-price">Total: {{ totalPrice | currency:'Rp ':'symbol':'3.0' }}</h3>
+            <button mat-flat-button color="primary" (click)="checkout()" [disabled]="isEmpty">Checkout</button>
       </div>
 </ng-template>

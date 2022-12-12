@@ -61,5 +61,25 @@
             "open_hours": "Open Hours",
             "quick_links": "Quick Links",
             "follow_us": "Follow Us"
+      },
+      "menu": {
+            "order": "Order",
+            "order_menu": "Order Menu",
+            "out_of_stock": "Out of stock",
+            "discover": "Discover",
+            "favorite": "Favorite",
+            "ingredients": "Ingredients",
+            "reviews": "Reviews",
+            "review_error": "Failed to load reviews",
+            "review_empty": "No reviews yet",
+            "menu_empty": "No menu found",
+            "menu_error": "Failed to load menu",
+            "cancel": "Cancel",
+            "add_to_cart": "Add to cart"
+      },
+      "cart": {
+            "cart_empty": "Cart is empty",
+            "cart_error": "Failed to load carts",
+            "go_to_menu": "Please select a menu"
       }
 }

@@ -2,7 +2,9 @@
       <img class="card-picture" [src]="menu.picture">
       <div class="card-content">
             <h2 class="card-menu-name">
-                  {{ menu.name }} <div class="card-menu-decline" *ngIf="oos">Out of stock</div>
+                  {{ menu.name }} <div class="card-menu-outstock" *ngIf="isOutStock">
+                        {{ 'menu.out_of_stock' | translate }}
+                  </div>
             </h2>
             <div class="card-menu-price">
                   <span *ngIf="isDiscount">{{ menu.price_after_discount | currency:'Rp ':'symbol':'3.0' }}</span>

@@ -1,12 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
-import { map } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 
 @Injectable({
       providedIn: 'root'
 })
 export class UserService {
+      private balance = new BehaviorSubject<number>(0);
+      balance$ = this.balance.asObservable();
+      
       constructor(private apollo: Apollo) { }
+
+      refreshBalance() {
+            const sub: any = this.getOne().subscribe({
+                  next: (result) => {
+                        this.balance.next(result.balance);
+                        sub.unsubscribe();
+                  },
+                  error: (error) => {
+                        console.log('Failed to fetch balance: ', error.message);
+                        sub.unsubscribe();
+                  }
+            });
+      }
 
       getAll(filters?: any) {
             const query = `

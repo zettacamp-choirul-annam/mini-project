@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { UserService } from 'src/app/shared/services/user.service';
+import { UserService } from 'src/app/services/user.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -14,14 +14,14 @@ export class HeaderProfileComponent implements OnInit {
       sub!: Subscription;
       balance: number = 0;
 
-      constructor(
-            private userService: UserService
-      ) { }
+      constructor(private userService: UserService) { }
 
       ngOnInit(): void {
             this.sub = this.userService.balance$.subscribe(balance => {
                   this.balance = balance;
             });
+
+            this.userService.refreshBalance();
       }
 
       ngOnDestroy() {

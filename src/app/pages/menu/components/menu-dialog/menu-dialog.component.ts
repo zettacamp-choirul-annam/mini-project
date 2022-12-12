@@ -1,107 +1,113 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CartService } from 'src/app/services/cart.service';
-import { CartLocalService } from 'src/app/services/cart-local.service';
+import { SaveCartService } from 'src/app/services/save-cart.service';
+import { RatingService } from 'src/app/services/rating.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { RatingService } from 'src/app/shared/services/rating.service';
 import Swal from 'sweetalert2';
 
 @Component({
-      selector: 'app-dialog',
-      templateUrl: './dialog.component.html',
-      styleUrls: ['./dialog.component.css']
+      selector: 'app-menu-dialog',
+      templateUrl: './menu-dialog.component.html',
+      styleUrls: ['./menu-dialog.component.css']
 })
-export class DialogComponent implements OnInit {
+export class MenuDialogComponent implements OnInit {
       subs: Subscription[] = [];
       ratings: any = [];
       menu: any;
-      ingredients: any = [];
       isLogedIn: boolean = false;
+      ingredients: any = [];
 
       isAvailable: boolean = true;
       isFavorite : boolean = true;
       isDiscount : boolean = false;
       favoriteId : string = '';
 
+      isRatingError: boolean = false;
+      isRatingEmpty: boolean = false;
+      
       constructor(
-            private ratingService: RatingService,
             private cartService: CartService,
-            private cartLocalService: CartLocalService,
+            private saveCartService: SaveCartService,
+            private ratingService: RatingService,
             private router: Router,
-            private dialogRef: MatDialogRef<DialogComponent>,
+            private dialogRef: MatDialogRef<MenuDialogComponent>,
             @Inject(MAT_DIALOG_DATA) public data: any,
       ) { }
 
       ngOnInit(): void {
             this.menu = this.data.menu;
-
-            this.ingredients = this.data.menu.ingredients.map((item: any) => {
+            this.isLogedIn = this.data.isLogedIn;
+            
+            this.ingredients = this.menu.ingredients.map((item: any) => {
                   return item.ingredient_id;
             });
-
-            this.isLogedIn = this.data.isLogedIn;
 
             this.isAvailable = this.menu.availableStock > 0;
             this.isFavorite  = this.menu.is_favorite;
             this.isDiscount  = this.menu.discount_status == 'ACTIVE';
             this.favoriteId  = this.menu.favorite_id;
-            
-            this.getRatings();
+
+            this.getRatings(); // get rating data
+      }
+
+      ngOnDestroy() {
+            this.subs.forEach(sub => sub.unsubscribe());
       }
 
       getRatings() {
-            const id = this.menu._id;
+            const payload = {
+                  menu_id: this.menu._id    
+            };
 
-            const sub = this.ratingService.getAll({ recipe_id: id }).subscribe({
+            const sub = this.ratingService.getAll(payload).subscribe({
                   next: (result) => {
                         this.ratings = result.listRating;
                   },
                   error: (error) => {
-                        console.log(error.message);
+                        this.isRatingError = true;
+                        console.error(error.message);
                   }
             });
 
             this.subs.push(sub);
-      }      
+      }
 
-      async addToCart(amount: number, menu: any) {
-            const payload = { amount, recipe_id: menu._id };
+      addToCart(amount: number) {
+            const payload = {
+                  amount,
+                  recipe_id: this.menu._id
+            };
 
             if (!this.isLogedIn) {
-                  Swal.fire({
-                        icon: 'success',
-                        title: 'Menu added to cart',
-                        text: 'Horreyy'
-                  });
-
                   this.dialogRef.close();
-                  
-                  // save cart to local storage
-                  this.cartLocalService.setCart({ ...payload, recipe_id: menu });
-                  this.cartService.refrestTotal(); return;
+
+                  // save cart to local storage 
+                  // and redirect to login page
+                  this.saveCartService.save(payload);
+                  this.router.navigate(['/auth/login']); return;
             }
 
             const sub = this.cartService.create(payload).subscribe({
                   next: () => {
                         this.dialogRef.close();
+                        this.cartService.refrestTotal();
 
                         Swal.fire({
                               icon: 'success',
-                              title: 'Menu added to cart',
-                              text: 'Horreyy'
+                              title: 'Item successfully added to your cart'
                         });
-
-                        this.cartService.refrestTotal();
                   },
                   error: (error) => {
                         this.dialogRef.close();
-                        
+
                         Swal.fire({
                               icon: 'error',
-                              title: 'Failed add menu to cart',
-                              text: error.message
+                              title: 'Failed to add item to your cart'
                         });
+
+                        console.error(error.message);
                   }
             });
 
