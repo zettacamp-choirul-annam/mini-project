@@ -22,8 +22,9 @@
             <div class="menu-title">Ingredients</div>
 
             <ul class="menu-ingredient">
-                  <li class="menu-ingredient-item">Bawang</li>
-                  <li class="menu-ingredient-item">Tahu</li>
+                  <li class="menu-ingredient-item" *ngFor="let ingredient of ingredients">
+                        {{ ingredient.name }}
+                  </li>
             </ul>
 
             <div class="menu-title">Reviews</div>

@@ -16,6 +16,7 @@ export class DialogComponent implements OnInit {
       subs: Subscription[] = [];
       ratings: any = [];
       menu: any;
+      ingredients: any = [];
       isLogedIn: boolean = false;
 
       isAvailable: boolean = true;
@@ -34,13 +35,18 @@ export class DialogComponent implements OnInit {
 
       ngOnInit(): void {
             this.menu = this.data.menu;
+
+            this.ingredients = this.data.menu.ingredients.map((item: any) => {
+                  return item.ingredient_id;
+            });
+
             this.isLogedIn = this.data.isLogedIn;
 
             this.isAvailable = this.menu.availableStock > 0;
             this.isFavorite  = this.menu.is_favorite;
             this.isDiscount  = this.menu.discount_status == 'ACTIVE';
             this.favoriteId  = this.menu.favorite_id;
-
+            
             this.getRatings();
       }
 
