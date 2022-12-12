@@ -24,6 +24,7 @@
             "email_required": "email is required!",
             "email_invalid": "invalid email address!",
             "password_label": "password",
+            "new_password_label": "new password",
             "password_required": "password is required!",
             "password_invalid": "password min 8 chars!"
       },

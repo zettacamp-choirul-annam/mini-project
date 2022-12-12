@@ -24,6 +24,7 @@
             "email_required": "email tidak boleh kosong!",
             "email_invalid": "email tidak valid!",
             "password_label": "kata sandi",
+            "new_password_label": "kata sandi baru",
             "password_required": "kata sandi tidak boleh kosong",
             "password_invalid": "kata sandi min 8 karater!"
       },
