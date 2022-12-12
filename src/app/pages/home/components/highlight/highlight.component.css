@@ -24,6 +24,6 @@
 
 .menu-card,
 .container::ng-deep .skeleton-loader {
-      width: calc((100% / 3) - 30px);
+      width: calc((100% / 3) - 20px);
       min-height: 500px;
 }
