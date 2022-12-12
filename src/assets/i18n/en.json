@@ -1,6 +1,10 @@
 {
       "auth": {
             "back_btn_label": "back",
+            "login": "Login",
+            "logout": "Logout",
+            "register": "Register",
+            "reset": "Reset",
             "login_heading": "Login",
             "login_subheading": "Please login to continue",
             "register_heading": "Register",
@@ -29,5 +33,12 @@
             "transaction": "Transaction",
             "menu_management": "Menu management",
             "stock_management": "Stock management"
+      },
+      "footer": {
+            "location": "Location",
+            "direction": "View map",
+            "open_hours": "Open Hours",
+            "quick_links": "Quick Links",
+            "follow_us": "Follow Us"
       }
 }

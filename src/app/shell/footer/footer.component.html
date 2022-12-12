@@ -1,16 +1,21 @@
 <footer class="footer">
       <div class="footer-wrapper">
-            <h3 class="footer-heading">Location</h3>
+            <h3 class="footer-heading">
+                  {{ 'footer.location' | translate }}
+            </h3>
             <div class="footer-list">
                   <div class="footer-item">3350 N Morrison <br> Road Muncie, IN 47304</div>
                   <a class="footer-item" href="#">
-                        <i-feather name="map"></i-feather> Direction
+                        <i-feather name="map"></i-feather>
+                        {{ 'footer.direction' | translate }}
                   </a>
             </div>
       </div>
 
       <div class="footer-wrapper">
-            <h3 class="footer-heading">Open Hours</h3>
+            <h3 class="footer-heading">
+                  {{ 'footer.open_hours' | translate }}
+            </h3>
             <div class="footer-list">
                   <div class="footer-item">Everyday</div>
                   <div class="footer-item">Lunch 12 - 3 PM</div>
@@ -19,15 +24,23 @@
       </div>
 
       <div class="footer-wrapper">
-            <h3 class="footer-heading">Quick Links</h3>
+            <h3 class="footer-heading">
+                  {{ 'footer.quick_links' | translate }}
+            </h3>
             <div class="footer-list">
-                  <a class="footer-item" routerLink="/home">Home</a>
-                  <a class="footer-item" routerLink="/menu">Menu</a>
+                  <a class="footer-item" routerLink="/home">
+                        {{ 'nav.home' | translate }}
+                  </a>
+                  <a class="footer-item" routerLink="/menu">
+                        {{ 'nav.menu' | translate }}
+                  </a>
             </div>
       </div>
 
       <div class="footer-wrapper">
-            <h3 class="footer-heading">Follow Us</h3>
+            <h3 class="footer-heading">
+                  {{ 'footer.follow_us' | translate }}
+            </h3>
             <div class="footer-row">
                   <a href="#" class="footer-social"><i-feather name="instagram"></i-feather></a>
                   <a href="#" class="footer-social"><i-feather name="twitter"></i-feather></a>

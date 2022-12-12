@@ -1,6 +1,10 @@
 {
       "auth": {
             "back_btn_label": "kembali",
+            "login": "Masuk",
+            "logout": "Keluar",
+            "register": "Daftar",
+            "reset": "Reset",
             "login_heading": "Masuk",
             "login_subheading": "Silahkan masuk untuk melanjutkan",
             "register_heading": "Daftar",
@@ -29,5 +33,12 @@
             "transaction": "Transaksi",
             "menu_management": "Menu manajemen",
             "stock_management": "Stok manajemen"
+      },
+      "footer": {
+            "location": "Lokasi",
+            "direction": "Lihat di peta",
+            "open_hours": "Jam Buka",
+            "quick_links": "Tautan Langsung",
+            "follow_us": "Ikuti Kami"
       }
 }
