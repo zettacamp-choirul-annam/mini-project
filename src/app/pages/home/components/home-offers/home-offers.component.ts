@@ -5,11 +5,11 @@ import { Router } from '@angular/router';
 import { extractColor } from 'src/app/shared/utils/extract-color';
 
 @Component({
-      selector: 'app-offers',
-      templateUrl: './offers.component.html',
-      styleUrls: ['./offers.component.css']
+      selector: 'app-home-offers',
+      templateUrl: './home-offers.component.html',
+      styleUrls: ['./home-offers.component.css']
 })
-export class OffersComponent implements OnInit {
+export class HomeOffersComponent implements OnInit {
       sub!: Subscription;
       offers: any = [];
       isLoad : boolean = true;

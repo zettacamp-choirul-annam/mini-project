@@ -4,18 +4,18 @@ import { HomeRoutingModule } from './home-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 import { HomeComponent } from './home.component';
-import { HeroComponent } from './components/hero/hero.component';
-import { OffersComponent } from './components/offers/offers.component';
-import { HighlightComponent } from './components/highlight/highlight.component';
-import { AboutComponent } from './components/about/about.component';
+import { HomeHeroComponent } from './components/home-hero/home-hero.component';
+import { HomeOffersComponent } from './components/home-offers/home-offers.component';
+import { HomeHighlightComponent } from './components/home-highlight/home-highlight.component';
+import { HomeAboutComponent } from './components/home-about/home-about.component';
 
 @NgModule({
       declarations: [
             HomeComponent,
-            HeroComponent,
-            OffersComponent,
-            HighlightComponent,
-            AboutComponent
+            HomeHeroComponent,
+            HomeOffersComponent,
+            HomeHighlightComponent,
+            HomeAboutComponent
       ],
       imports: [
             CommonModule,

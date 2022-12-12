@@ -4,11 +4,11 @@ import { MenuService } from 'src/app/pages/menu-management/services/menu.service
 import { Router } from '@angular/router';
 
 @Component({
-      selector: 'app-highlight',
-      templateUrl: './highlight.component.html',
-      styleUrls: ['./highlight.component.css']
+      selector: 'app-home-highlight',
+      templateUrl: './home-highlight.component.html',
+      styleUrls: ['./home-highlight.component.css']
 })
-export class HighlightComponent implements OnInit {
+export class HomeHighlightComponent implements OnInit {
       sub!: Subscription;
       menus: any = [];
 
