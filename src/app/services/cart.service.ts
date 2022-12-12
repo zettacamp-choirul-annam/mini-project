@@ -134,7 +134,7 @@ export class CartService {
 
       update(data: any) {
             const query = `
-                  mutation ($data: MenuInput) {
+                  mutation ($data: CartMenuInput) {
                         updateCart(menu: $data) { _id }
                   }`;
 
