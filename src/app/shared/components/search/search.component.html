@@ -1,0 +1,5 @@
+<form class="search" (submit)="onSubmit($event)">
+      <i-feather class="search-icon" name="search"></i-feather>
+      <input class="search-input" [placeholder]="placeholder" #input (input)="onInput(input.value)">
+      <button mat-icon-button type="reset" (click)="onReset()"><i-feather name="x"></i-feather></button>
+</form>

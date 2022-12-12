@@ -1,0 +1,9 @@
+<div class="tab">
+      <button mat-flat-button 
+            class="tab-item" 
+            *ngFor="let label of labels"
+            [ngClass]="{ active: activeTab == label }"
+            (click)="onChange(label)">
+            {{ label }}
+      </button>
+</div>
