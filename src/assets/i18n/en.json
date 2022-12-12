@@ -34,7 +34,9 @@
             },
             "offers": {
                   "heading": "Special Offers",
-                  "subheading": "Get special offers discount now!"
+                  "subheading": "Get special offers discount now!",
+                  "get": "Get",
+                  "discount": "Discount"
             },
             "highlight": {
                   "heading": "Our Popular Menu",

@@ -13,7 +13,9 @@
                         <div class="menu-description">{{ offer.description }}</div>
 
                         <div class="menu-discount">
-                              Get {{ offer.discount }}<small>%</small> &nbsp; Discount
+                              {{ 'home.offers.get' | translate }} 
+                              {{ offer.discount }}<small>%</small> &nbsp; 
+                              {{ 'home.offers.discount' | translate }}
                               <i-feather name="arrow-right"></i-feather>
                         </div>
                   </div>
