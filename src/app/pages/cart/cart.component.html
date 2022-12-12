@@ -25,6 +25,7 @@
                   *ngFor="let cart of carts" [cart]="cart" 
                   (_deleted)="getCarts()" 
                   (_updated)="getCarts()"
+                  [user]="user"
                   [oos]="declineStocks.includes(cart.recipe_id._id)"
             ></app-card>
       </div>

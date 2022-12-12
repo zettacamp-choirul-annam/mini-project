@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { CartService } from 'src/app/services/cart.service';
+import { CartLocalService } from 'src/app/services/cart-local.service';
 import { Subscription } from 'rxjs';
-import { CartService } from '../../services/cart.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -10,6 +11,7 @@ import Swal from 'sweetalert2';
 })
 export class CardComponent implements OnInit {
       @Input() cart: any;
+      @Input() user: any;
       @Input() oos: any;
       @Output() _deleted = new EventEmitter();
       @Output() _updated = new EventEmitter();
@@ -19,7 +21,8 @@ export class CardComponent implements OnInit {
       isDiscount: boolean = false;
 
       constructor(
-            private cartService: CartService
+            private cartService: CartService,
+            private cartLocalService: CartLocalService
       ) { }
 
       ngOnInit(): void {
@@ -36,6 +39,11 @@ export class CardComponent implements OnInit {
                   recipe_id: this.menu._id,
                   amount
             };
+
+            if (!this.user) {
+                  this.cartLocalService.updateAmount(this.menu._id, amount);
+                  this._updated.emit(); return;
+            }
 
             const sub = this.cartService.update(payload).subscribe({
                   next: () => this._updated.emit(),
@@ -63,10 +71,17 @@ export class CardComponent implements OnInit {
             if (swal.isDismissed) return;
 
             const id = this.cart._id;
+
+            if (!this.user) {
+                  this.cartLocalService.removeCart(this.menu._id);
+                  this.cartService.refrestTotal();
+                  this._deleted.emit(); return;
+            }
+
             const sub = this.cartService.delete(id).subscribe({
                   next: () => {
                         this._deleted.emit();
-                        this.cartService.updateTotal();
+                        this.cartService.refrestTotal();
                   },
                   error: (error) => {
                         Swal.fire({

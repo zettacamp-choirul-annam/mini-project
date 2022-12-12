@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { CartService } from 'src/app/pages/cart/services/cart.service';
+import { CartService } from 'src/app/services/cart.service';
+import { CartLocalService } from 'src/app/services/cart-local.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { RatingService } from 'src/app/shared/services/rating.service';
@@ -25,6 +26,7 @@ export class DialogComponent implements OnInit {
       constructor(
             private ratingService: RatingService,
             private cartService: CartService,
+            private cartLocalService: CartLocalService,
             private router: Router,
             private dialogRef: MatDialogRef<DialogComponent>,
             @Inject(MAT_DIALOG_DATA) public data: any,
@@ -57,24 +59,22 @@ export class DialogComponent implements OnInit {
             this.subs.push(sub);
       }      
 
-      async addToCart(amount: number, id: string) {
+      async addToCart(amount: number, menu: any) {
+            const payload = { amount, recipe_id: menu._id };
+
             if (!this.isLogedIn) {
-                  const swal = await Swal.fire({
-                        icon: 'info',
-                        title: 'Login to continue',
-                        text: 'Please login or register to continue the order',
-                        showCancelButton: true,
-                        confirmButtonText: 'Login',
-                        cancelButtonText: 'Cancel'
+                  Swal.fire({
+                        icon: 'success',
+                        title: 'Menu added to cart',
+                        text: 'Horreyy'
                   });
-      
-                  if (swal.isDismissed) return;
 
                   this.dialogRef.close();
-                  this.router.navigate(['/auth/login']); return;
+                  
+                  // save cart to local storage
+                  this.cartLocalService.setCart({ ...payload, recipe_id: menu });
+                  this.cartService.refrestTotal(); return;
             }
-
-            const payload = { amount, recipe_id: id };
 
             const sub = this.cartService.create(payload).subscribe({
                   next: () => {
@@ -86,14 +86,14 @@ export class DialogComponent implements OnInit {
                               text: 'Horreyy'
                         });
 
-                        this.cartService.updateTotal();
+                        this.cartService.refrestTotal();
                   },
                   error: (error) => {
                         this.dialogRef.close();
                         
                         Swal.fire({
                               icon: 'error',
-                              title: 'Failed add to cart',
+                              title: 'Failed add menu to cart',
                               text: error.message
                         });
                   }

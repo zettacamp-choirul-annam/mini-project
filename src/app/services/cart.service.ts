@@ -1,12 +1,47 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
-import { map } from 'rxjs'
+import { CartLocalService } from './cart-local.service';
+import { AuthService } from './auth.service';
+import { BehaviorSubject, map } from 'rxjs'
 
 @Injectable({
       providedIn: 'root'
 })
 export class CartService {
-      constructor(private apollo: Apollo) { }
+      private total = new BehaviorSubject<number>(0);
+      total$ = this.total.asObservable();
+
+      isLogedIn: boolean = false;
+
+      constructor(
+            private apollo: Apollo,
+            private cartLocalService: CartLocalService,
+            private authService: AuthService
+      ) {
+            this.isLogedIn = this.authService.getUser() != null;
+            this.refrestTotal();
+      }
+
+      refrestTotal() {
+            // if the user is not logged in fetch data from local
+            if (!this.isLogedIn) {
+                  const result = this.cartLocalService.getCart();
+                  this.total.next(result.total); return;
+            }
+
+            // otherwise it will fetch from backend
+            const sub: any = this.getAll({ page: 0, limit: 999999999 }).subscribe({
+                  next: (result) => {
+                        this.total.next(result.total);
+                        sub.unsubscribe();
+                  },
+                  error: (error) => {
+                        const code = error.graphQLErrors[0].extensions.code;
+                        if (code == 'cart/cart-not-found') this.total.next(0);
+                        sub.unsubscribe();
+                  }
+            });
+      }
 
       getAll(filters?: any) {
             const query = `

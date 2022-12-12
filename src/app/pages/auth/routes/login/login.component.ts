@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { forceValidate } from 'src/app/shared/utils/force-validate';
 import { AuthService } from 'src/app/services/auth.service';
+import { CartLocalService } from 'src/app/services/cart-local.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -24,6 +25,7 @@ export class LoginComponent implements OnInit {
       constructor(
             private formBuilder: FormBuilder,
             private authService: AuthService,
+            private cartLocalService: CartLocalService,
             private router: Router
       ) { }
 
@@ -52,8 +54,10 @@ export class LoginComponent implements OnInit {
             const sub = this.authService.login(payload).subscribe({
                   next: () => {
                         this.inProgress = false;
-                        this.router.navigate(['/home']);
-                  },
+                        this.router.navigate(['/home']).then(() => {
+                              this.cartLocalService.sendCart();
+                        });
+                  },    
                   error: (error) => {
                         this.inProgress = false;
 

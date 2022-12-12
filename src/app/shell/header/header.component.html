@@ -2,8 +2,8 @@
       <h1 class="header-title">BEEF!</h1>
       
       <app-nav [user]="user"></app-nav>
-      <app-cart *ngIf="user?.role == 'USER'"></app-cart>
       
+      <app-cart></app-cart>
       <app-lang-switch></app-lang-switch>
 
       <app-profile *ngIf="user" [user]="user" (_logout)="onLogout()"></app-profile>

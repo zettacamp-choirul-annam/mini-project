@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CartService } from './services/cart.service';
-import { TransactionService } from 'src/app/shared/services/transaction.service';
+import { CartService } from 'src/app/services/cart.service';
+import { CartLocalService } from 'src/app/services/cart-local.service';
 import { UserService } from 'src/app/shared/services/user.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { TransactionService } from 'src/app/shared/services/transaction.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -13,6 +15,7 @@ import Swal from 'sweetalert2';
 })
 export class CartComponent implements OnInit {
       subs: Subscription[] = [];
+      user: any;
       carts: any = [];
       cartPrice: number = 0;
       declineStocks: any = [];
@@ -21,15 +24,20 @@ export class CartComponent implements OnInit {
       isLoad: boolean = true;
       isError: boolean = false;
       isEmpty: boolean = false;
+
+      isLogedIn: boolean = false;
       
       constructor(
             private cartService: CartService,
+            private cartLocalService: CartLocalService,
             private transactionService: TransactionService,
             private userService: UserService,
+            private authService: AuthService,
             private router: Router
       ) { }
 
       ngOnInit(): void {
+            this.user = this.authService.getUser();
             this.getCarts();
       }
 
@@ -38,6 +46,14 @@ export class CartComponent implements OnInit {
       }
 
       getCarts() {
+            if (!this.user) {
+                  const result = this.cartLocalService.getCart();
+
+                  this.carts = result.listCart;
+                  this.cartPrice = result.totalPrice;
+                  this.isLoad = false; return;
+            }
+            
             const sub = this.cartService.getAll().subscribe({
                   next: (result) => {
                         this.carts = result.listCart;
@@ -115,7 +131,7 @@ export class CartComponent implements OnInit {
                         }
 
                         this.getCarts();
-                        this.cartService.updateTotal();
+                        this.cartService.refrestTotal();
                   },
                   error: (error) => {
                         Swal.fire({

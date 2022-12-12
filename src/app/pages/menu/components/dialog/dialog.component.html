@@ -48,5 +48,5 @@
 
 <div class="mat-dialog-foot" mat-dialog-actions align="end">
       <app-quantity-input class="menu-quantity" [min]="1" [max]="menu.availableStock" #quantity></app-quantity-input>
-      <button mat-flat-button color="primary" cdkFocusInitial (click)="addToCart(quantity.value, menu._id)">Add to cart</button>
+      <button mat-flat-button color="primary" cdkFocusInitial (click)="addToCart(quantity.value, menu)">Add to cart</button>
 </div>
