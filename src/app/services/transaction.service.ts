@@ -107,24 +107,6 @@ export class TransactionService {
       }
 
       create(data: any) {
-            const keys = [
-                  "discount", "amount", "discount_status",
-                  "name", "picture", "note", "price",
-                  "price_after_discount", "recipe_id"
-            ];
-
-            let { total, menus } = data;
-
-            menus = menus.map((item: any) => {
-                  const menu: any = {};
-
-                  for (let [key, value] of Object.entries(item)) {
-                        if (keys.includes(key)) menu[key] = value;
-                  }
-
-                  return menu;
-            });
-
             const query = `
                   mutation ($total: Float!, $menus: [MenuInput]) {
                         createTransaction(totalPrice: $total, menu_input: $menus) {
@@ -134,6 +116,7 @@ export class TransactionService {
                                     isStock
                                     recipe_name
                               }
+                              order_status
                               is_balance
                               is_stock
                         }
@@ -142,7 +125,7 @@ export class TransactionService {
 
             const response = this.apollo.mutate({
                   mutation: gql(query),
-                  variables: { total, menus }
+                  variables: data
             });
 
             return response.pipe(

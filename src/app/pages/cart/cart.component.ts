@@ -3,7 +3,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { CartLocalService } from 'src/app/services/cart-local.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { TransactionService } from 'src/app/shared/services/transaction.service';
+import { TransactionService } from 'src/app/services/transaction.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -84,7 +84,29 @@ export class CartComponent implements OnInit {
             this.subs.push(sub);
       }
 
-      checkout() {
+      async checkout() {
+            if (!this.user) {
+                  Swal.fire({
+                        icon: 'info',
+                        title: 'Login',
+                        text: 'Please login to continue your order',
+                        confirmButtonText: 'Login',
+                        showCancelButton: true,
+                        cancelButtonText: 'Cancel',
+                        preConfirm: () => { this.router.navigate(['/auth/login']) }
+                  }); return;
+            }
+
+            const confirm = await Swal.fire({
+                  icon: 'question',
+                  title: 'Do you want to checkout',
+                  confirmButtonText: 'Checkout',
+                  showCancelButton: true,
+                  cancelButtonText: 'Cancel'
+            });
+
+            if (confirm.isDismissed) return;
+
             const carts = this.carts.map((cart: any) => {
                   return {
                         recipe_id: cart.recipe_id._id,
@@ -101,7 +123,7 @@ export class CartComponent implements OnInit {
             
             const payload = {
                   menus: carts,
-                  price: this.cartPrice
+                  total: this.cartPrice
             };
 
             const sub = this.transactionService.create(payload).subscribe({
