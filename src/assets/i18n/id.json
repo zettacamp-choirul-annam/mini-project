@@ -41,7 +41,8 @@
             },
             "highlight": {
                   "heading": "Menu Populer Kami",
-                  "subheading": "Hadir dari menu yang disukai banyak orang"
+                  "subheading": "Hadir dari menu yang disukai banyak orang",
+                  "view_all_menu": "Lihat semua menu"
             },
             "about": {
                   "heading": "Dibutuhkan Sekitar 60 Tahun Untuk Memasak Steak Yang Sempurna",
@@ -81,5 +82,8 @@
             "cart_empty": "Kerangjang kosong",
             "cart_error": "Gagal memuat keranjang",
             "go_to_menu": "Silahkan pilih menu"
+      },
+      "transaction": {
+            "rate_order": "Nilai orderan"
       }
 }

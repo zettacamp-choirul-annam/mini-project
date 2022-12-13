@@ -4,14 +4,13 @@ import { RatingService } from 'src/app/shared/services/rating.service';
 import Swal from 'sweetalert2';
 
 @Component({
-      selector: 'app-dialog',
-      templateUrl: './dialog.component.html',
-      styleUrls: ['./dialog.component.css']
+      selector: 'app-transaction-dialog',
+      templateUrl: './transaction-dialog.component.html',
+      styleUrls: ['./transaction-dialog.component.css']
 })
-export class DialogComponent implements OnInit {
+export class TransactionDialogComponent implements OnInit {
       ratings: any = {};
       menus: any;
-      transId: any;
       isLoad: boolean = false;
 
       get ratedLength() {
@@ -20,13 +19,12 @@ export class DialogComponent implements OnInit {
 
       constructor(
             private ratingService: RatingService,
-            public dialogRef: MatDialogRef<DialogComponent>,
-            @Inject(MAT_DIALOG_DATA) public data: any,
+            public dialogRef: MatDialogRef<TransactionDialogComponent>,
+            @Inject(MAT_DIALOG_DATA) public data: any
       ) { }
 
       ngOnInit(): void {
-            this.menus = this.data.menus;
-            this.transId = this.data.transId;            
+            this.menus = this.data.menus;    
       }
 
       onRate(data: any) {
@@ -38,7 +36,7 @@ export class DialogComponent implements OnInit {
                   return {
                         rating_value: value.star,
                         review: value.review,
-                        transaction_id: this.transId,
+                        transaction_id: this.data.transaction_id,
                         recipe_id: value.recipe_id
                   };
             });
@@ -46,25 +44,26 @@ export class DialogComponent implements OnInit {
             this.isLoad = true;
 
             this.ratingService.create(data).subscribe({
-                  next: (result) => {
-                        this.isLoad = false;
+                  next: () => {
                         this.dialogRef.close(true);
+                        this.isLoad = false;
 
                         Swal.fire({
                               icon: 'success',
-                              title: 'Hello world',
-                              text: 'Lorem ipsum dolor sit jamet'
+                              title: 'Thank You',
+                              text: 'Thank you for giving us ratings and reviews'
                         });
                   },
                   error: (error) => {
-                        this.isLoad = false;
                         this.dialogRef.close(false);
+                        this.isLoad = false;
 
                         Swal.fire({
                               icon: 'error',
-                              title: 'Failed to rate order!',
-                              text: error.message
+                              title: 'Failed to rate order!'
                         });
+
+                        console.error(error.message);
                   }
             });
       }

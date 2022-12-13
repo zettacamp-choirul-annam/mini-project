@@ -1,23 +1,23 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-      selector: 'app-menu-rate',
-      templateUrl: './menu-rate.component.html',
-      styleUrls: ['./menu-rate.component.css']
+      selector: 'app-transaction-rate-input',
+      templateUrl: './transaction-rate-input.component.html',
+      styleUrls: ['./transaction-rate-input.component.css']
 })
-export class MenuRateComponent implements OnInit {
+export class TransactionRateInputComponent implements OnInit {
       @Input() menu: any;
       @Output() _rate = new EventEmitter();
 
       isRated: boolean = false;
       rateStar: number = 0;
       rateReview: string = '';
-      
+
       constructor() { }
 
       ngOnInit(): void { }
 
-      onrRateStarChange(value: number) {
+      onRateStarChange(value: number) {
             if (!this.isRated) this.isRated = true;
             this.rateStar = value;
             this.emitData();
@@ -29,10 +29,12 @@ export class MenuRateComponent implements OnInit {
       }
 
       emitData() {
-            this._rate.emit({
+            const data = {
                   star: this.rateStar,
                   review: this.rateReview,
                   ...this.menu
-            })
+            };
+
+            this._rate.emit(data);
       }
 }

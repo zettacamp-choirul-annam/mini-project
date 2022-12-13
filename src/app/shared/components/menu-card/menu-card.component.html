@@ -13,7 +13,7 @@
       </div>
       
       <div class="menu-action">
-            <button class="menu-action-order" [disabled]="!isAvailable" mat-flat-button color="primary" (click)="onOrder()">
+            <button class="menu-action-order" [disabled]="!isAvailable" mat-flat-button color="primary" *ngIf="showOrder" (click)="onOrder()">
                   <span *ngIf="isAvailable">
                         {{ 'menu.order' | translate }}
                   </span>

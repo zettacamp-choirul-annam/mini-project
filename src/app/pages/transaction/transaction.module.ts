@@ -2,19 +2,20 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TransactionRoutingModule } from './transaction-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+
 import { TransactionComponent } from './transaction.component';
-import { CardComponent } from './components/card/card.component';
-import { DialogComponent } from './components/dialog/dialog.component';
-import { RateComponent } from './components/rate/rate.component';
-import { MenuRateComponent } from './components/menu-rate/menu-rate.component';
+import { TransactionDialogComponent } from './components/transaction-dialog/transaction-dialog.component';
+import { TransactionHistoryComponent } from './components/transaction-history/transaction-history.component';
+import { TransactionRatingComponent } from './components/transaction-rating/transaction-rating.component';
+import { TransactionRateInputComponent } from './components/transaction-rate-input/transaction-rate-input.component';
 
 @NgModule({
       declarations: [
             TransactionComponent,
-            CardComponent,
-            DialogComponent,
-            RateComponent,
-            MenuRateComponent
+            TransactionDialogComponent,
+            TransactionHistoryComponent,
+            TransactionRatingComponent,
+            TransactionRateInputComponent
       ],
       imports: [
             CommonModule,

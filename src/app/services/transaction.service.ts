@@ -45,6 +45,7 @@ export class TransactionService {
                                           picture
                                           price
                                           price_after_discount
+                                          recipe_id { _id }
                                     }
                               }
                         }
@@ -96,6 +97,7 @@ export class TransactionService {
                                     picture
                                     price
                                     price_after_discount
+                                    recipe_id { _id }
                               }
                         }
                   }

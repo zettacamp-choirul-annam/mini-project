@@ -1,0 +1,107 @@
+.history {
+      width: 100%;
+      margin-bottom: 30px;
+      background-color: #fff;
+      border: 2px solid transparent;
+      box-shadow: 0 10px 20px rgba(119, 140, 202, 0.15);
+      border-radius: 20px;
+      transition: 0.2s;
+}
+
+.history:hover {
+      border-color: hsl(200, 20%, 80%);
+}
+
+.history-head {
+      width: 100%;
+      padding: 30px;
+      display: flex;
+      align-items: center;
+}
+
+.history-user {
+      margin-right: 30px;
+      display: flex;
+      align-items: center;
+}
+
+.history-user-picture {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: 10px;
+}
+
+.history-user-name {
+
+}
+
+.history-rate {
+      margin-left: auto;
+}
+
+.history-date,
+.history-status {
+      font-size: 0.85rem;
+}
+
+.history-status {
+      margin-left: auto;
+      padding: 5px 10px;
+      border-radius: 50px;
+}
+
+.history-status.success {
+      color: #11c580;
+      background-color: rgba(17, 197, 128, 0.1);
+}
+
+.history-status.failed {
+      color: #ff0037;
+      background-color: rgba(255, 0, 55, 0.1);
+}
+
+.history-body {
+      width: 100%;
+      padding: 0 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+}
+
+.history-foot {
+      width: 100%;
+      padding: 30px;
+}
+
+.history-total-price {
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+}
+
+.menu {
+      width: 100%;
+      display: flex;
+      align-items: center;
+}
+
+.menu-picture {
+      width: 50px;
+      height: auto;
+      margin-right: 20px;
+}
+
+.menu-info {
+      margin-right: auto;
+}
+
+.menu-name {
+      font-weight: 500;
+      margin-bottom: 5px;
+}
+
+.menu-price {
+      font-size: 0.8rem;
+}

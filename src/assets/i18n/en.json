@@ -41,7 +41,8 @@
             },
             "highlight": {
                   "heading": "Our Popular Menu",
-                  "subheading": "Present from the menu that most people like"
+                  "subheading": "Present from the menu that most people like",
+                  "view_all_menu": "View all menu"
             },
             "about": {
                   "heading": "It Takes About 60 Years To Cook The Perfect Steak",
@@ -81,5 +82,8 @@
             "cart_empty": "Cart is empty",
             "cart_error": "Failed to load carts",
             "go_to_menu": "Please select a menu"
+      },
+      "transaction": {
+            "rate_order": "Rate order"
       }
 }

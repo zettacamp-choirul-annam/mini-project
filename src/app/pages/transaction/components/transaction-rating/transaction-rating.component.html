@@ -1,0 +1,13 @@
+<div class="rating">
+      <div class="menu">
+            <img [src]="rating.recipe_id.picture" alt="" class="menu-picture">
+            <div class="menu-name">{{ rating.recipe_id.name }}</div>
+      </div>
+      <div class="rating-info">
+            <div class="rating-star">
+                  <i-feather name="star" *ngFor="let i of [1, 2, 3, 4, 5]" [ngClass]="{ active: rating.rating_value >= i }"></i-feather>
+            </div>
+            <div class="rating-date">{{ rating.rating_date }}</div>
+      </div>
+      <div class="rating-review">{{ rating.review }}</div>
+</div>

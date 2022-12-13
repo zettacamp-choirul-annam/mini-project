@@ -1,49 +1,37 @@
 <div class="container">
       <div class="toolbar">
-            <div class="tab">
-                  <div class="tab-item" [ngClass]="{ active: currentTab == 'history' }" (click)="switchTab('history')">History</div>
-                  <div class="tab-item" [ngClass]="{ active: currentTab == 'ratings' }" (click)="switchTab('ratings')">Ratings</div>
-            </div>
+            <app-tab class="tab" [labels]="tabLabels" (_change)="onTabChange($event)"></app-tab>
       </div>
 
-      <ngx-skeleton-loader class="card-container" count="3" animation="progress" *ngIf="isLoad"></ngx-skeleton-loader>
-
-      <div class="content" *ngIf="!isLoad">
-            <div *ngIf="currentTab == 'history'; then history_template else rating_template"></div>
+      <div class="content">
+            <div *ngIf="isError || isEmpty; then state else content"></div>
       </div>
 </div>
 
-<ng-template #history_template>
-      <div class="card-container">
-            <app-card 
-                  *ngFor="let transaction of transactions" [transaction]="transaction" 
-                  [role]="role"
-                  [transId]="transaction._id"
-                  (_rate)="onRate($event)">
-            </app-card>
+<ng-template #content>
+      <ngx-skeleton-loader class="loader" count="3" animation="progress" *ngIf="isLoad"></ngx-skeleton-loader>
+
+      <div class="wrapper" *ngIf="currentTab == 'History' && !isLoad">
+            <app-transaction-history *ngFor="let transaction of transactions" [transaction]="transaction"></app-transaction-history>
+            <mat-paginator 
+                  (page)="onPaginatorChange($event)" 
+                  [pageIndex]="pagination.page" 
+                  [pageSize]="pagination.limit" 
+                  [length]="pagination.total">
+            </mat-paginator>
       </div>
-      <mat-paginator 
-            (page)="onPaginatorChange($event)" 
-            [pageIndex]="pagination.page" 
-            [pageSize]="pagination.limit" 
-            [length]="pagination.total">
-      </mat-paginator>
+
+      <div class="wrapper" *ngIf="currentTab == 'Ratings' && !isLoad">
+            <app-transaction-rating *ngFor="let rating of ratings" [rating]="rating"></app-transaction-rating>
+      </div>
 </ng-template>
 
-<ng-template #rating_template>
-      <div class="rating-container">
-            <div class="rating" *ngFor="let rating of ratings">
-                  <div class="menu">
-                        <img [src]="rating.recipe_id.picture" alt="" class="menu-picture">
-                        <div class="menu-name">{{ rating.recipe_id.name }}</div>
-                  </div>
-                  <div class="rating-info">
-                        <div class="rating-star">
-                              <i-feather name="star" *ngFor="let i of [1, 2, 3, 4, 5]" [ngClass]="{ active: rating.rating_value >= i }"></i-feather>
-                        </div>
-                        <div class="rating-date">{{ rating.rating_date }}</div>
-                  </div>
-                  <div class="rating-review">{{ rating.review }}</div>
+<ng-template #state>
+      <div class="state">
+            <img class="state-image" src="../../../assets/images/empty.svg" alt="">
+            <div class="state-message">
+                  <span *ngIf="isEmpty">{{ 'menu.menu_empty' | translate }}</span>
+                  <span *ngIf="isError">{{ 'menu.menu_error' | translate }}</span>
             </div>
       </div>
 </ng-template>

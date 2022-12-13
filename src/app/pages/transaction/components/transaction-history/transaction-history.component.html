@@ -1,0 +1,43 @@
+<div class="history">
+      <div class="history-head">
+            <div class="history-user" *ngIf="isAdmin">
+                  <img class="history-user-picture" src="https://p16-sign-sg.tiktokcdn.com/aweme/720x720/tos-alisg-avt-0068/b32b40cd0506e308859c11498d47ef7e.jpeg?x-expires=1670907600&x-signature=w8wJX2421Tkda%2BmE%2Fxcm69yh%2FFg%3D" alt="">
+                  <div class="history-user-name">
+                        {{ user.first_name }} {{ user.last_name }}
+                  </div>
+            </div>
+            
+            <div class="history-date">{{ transaction.order_date }}</div>
+
+            <button class="history-rate" mat-flat-button color="primary" *ngIf="!isAdmin" (click)="rateOrder()" [disabled]="isRated">
+                  {{ 'transaction.rate_order' | translate }}
+            </button>
+
+            <div class="history-status" [ngClass]="{ success: isSuccess, failed: !isSuccess}" *ngIf="isAdmin">
+                  {{ transaction.order_status | lowercase }}
+            </div>
+      </div>
+
+      <div class="history-body">
+            <div class="menu" *ngFor="let menu of menus">
+                  <img class="menu-picture" [src]="menu.picture" alt="">
+                  <div class="menu-info">
+                        <div class="menu-name">{{ menu.name }}</div>
+                        <div class="menu-price">
+                              {{ menu.amount }} x {{ menu.price_after_discount | currency:'Rp ':'symbol':'3.0' }}
+                        </div>
+                  </div>
+                  <div class="menu-total-price">
+                        {{ (menu.price_after_discount * menu.amount) | currency:'Rp ':'symbol':'3.0' }}
+                  </div>
+            </div>
+      </div>
+
+      <div class="history-foot">
+            <div class="history-total-price">
+                  <span>Total:</span>
+                  <span>{{ transaction.total_price | currency:'Rp ':'symbol':'3.0' }}</span>
+            </div>
+      </div>
+</div>
+

@@ -13,6 +13,7 @@ export class MenuCardComponent implements OnInit {
 
       @Input() menu: any;
       @Input() showFavorite: boolean = true;
+      @Input() showOrder: boolean = true;
       @Output() _order  = new EventEmitter();
 
       isAvailable: boolean = true;
