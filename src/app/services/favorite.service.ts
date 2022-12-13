@@ -24,15 +24,15 @@ export class FavoriteService {
 
       getOne() { }
 
-      create(data: any) {
+      create(id: string) {
             const query = `
-                  mutation ($menu_id: ID!) {
-                        createFavorite(recipe_id: $menu_id) { _id }
+                  mutation ($id: ID!) {
+                        createFavorite(recipe_id: $id) { _id }
                   }`;
 
             const response = this.apollo.mutate({
                   mutation: gql(query),
-                  variables: { ...data }
+                  variables: { id }
             });
 
             return response.pipe(
