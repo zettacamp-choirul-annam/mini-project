@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Injectable({
       providedIn: 'root'
 })
-export class MenuGuard implements CanActivate {
+export class TransactionGuard implements CanActivate {
       constructor(
             private authService: AuthService,
             private router: Router
@@ -15,9 +15,8 @@ export class MenuGuard implements CanActivate {
 
       canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
             const user = this.authService.getUser();
-            const isAdmin = user && user.role == 'ADMIN';
-
-            if (!isAdmin) {
+            
+            if (user == null) {
                   return this.router.navigate(['/home']);
             }
 

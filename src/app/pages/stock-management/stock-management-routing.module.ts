@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { StockGuard } from './guards/stock.guard';
 import { StockManagementComponent } from './stock-management.component';
 
 const routes: Routes = [
-      { path: '', component: StockManagementComponent, canActivate: [StockGuard] }
+      { path: '', component: StockManagementComponent }
 ];
 
 @NgModule({
