@@ -11,7 +11,7 @@ export class StockService {
       getAll(filters?: any) {
             const query = `
                   query ($filters: IngredientFilter) {
-                        getAllIngredients(filters: $filter) {
+                        getAllIngredients(filter: $filters) {
                               total,
                               listIngredient { _id, name, stock, unit, list_recipe }
                         }

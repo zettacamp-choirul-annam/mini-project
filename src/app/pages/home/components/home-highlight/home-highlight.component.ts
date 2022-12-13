@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { MenuService } from 'src/app/pages/menu-management/services/menu.service';
+import { MenuService } from 'src/app/services/menu.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 

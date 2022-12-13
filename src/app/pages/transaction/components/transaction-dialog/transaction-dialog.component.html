@@ -5,7 +5,7 @@
 </div>
 
 <div class="mat-dialog-body" mat-dialog-content>
-      <!-- <app-transaction-rating *ngFor="let menu of data.menus" [menu]="menu" (_rate)="onRate($event)"></app-transaction-rating> -->
+      <app-transaction-rate-input *ngFor="let menu of data.menus" [menu]="menu" (_rate)="onRate($event)"></app-transaction-rate-input>
 </div>
 
 <div class="mat-dialog-foot" mat-dialog-actions align="end">

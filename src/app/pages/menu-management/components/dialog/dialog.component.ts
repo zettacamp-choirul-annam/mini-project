@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
-import { StockService } from 'src/app/pages/stock-management/services/stock.service';
+import { StockService } from 'src/app/services/stock.service';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 

@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { RatingService } from 'src/app/shared/services/rating.service';
+import { RatingService } from 'src/app/services/rating.service';
 import Swal from 'sweetalert2';
 
 @Component({

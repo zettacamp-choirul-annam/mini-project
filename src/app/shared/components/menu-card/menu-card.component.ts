@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { FavoriteService } from 'src/app/services/favorite.service';
 import Swal from 'sweetalert2';
-import { FavoriteService } from '../../services/favorite.service';
 
 @Component({
       selector: 'app-menu-card',

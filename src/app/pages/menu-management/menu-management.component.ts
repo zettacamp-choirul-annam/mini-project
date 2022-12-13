@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { MenuService } from './services/menu.service';
+import { MenuService } from 'src/app/services/menu.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './components/dialog/dialog.component';
