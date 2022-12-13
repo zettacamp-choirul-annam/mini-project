@@ -26,6 +26,7 @@
 .container::ng-deep .skeleton-loader, .menu {
       width: calc(50% - 16px);
       height: 350px;
+      border-radius: 20px;
 }
 
 .menu {

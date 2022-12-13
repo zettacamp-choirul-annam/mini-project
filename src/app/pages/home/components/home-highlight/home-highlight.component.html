@@ -10,12 +10,13 @@
                   *ngFor="let menu of menus" 
                   [menu]="menu" 
                   [showFavorite]="false"
+                  [showOrder]="!isAdmin"
                   (_order)="goToMenu(menu._id)">
             </app-menu-card>
       </div>
 
-      <a class="view-all" mat-flat-button routerLink="/menu">
-            View all menu
+      <a class="view-all" mat-flat-button routerLink="/menu" *ngIf="!isAdmin">
+            {{ 'home.highlight.view_all_menu' | translate }}
             <i-feather name="arrow-right"></i-feather>
       </a>
 </div>

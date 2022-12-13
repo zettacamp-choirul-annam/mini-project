@@ -28,6 +28,7 @@
 .container::ng-deep .skeleton-loader {
       width: calc((100% / 3) - 20px);
       min-height: 500px;
+      border-radius: 20px;
 }
 
 .view-all {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MenuService } from 'src/app/pages/menu-management/services/menu.service';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
       selector: 'app-home-highlight',
@@ -15,13 +16,17 @@ export class HomeHighlightComponent implements OnInit {
       // state
       isLoad : boolean = true;
       isError: boolean = false;
+      isAdmin: boolean = false;
 
       constructor(
             private menuService: MenuService,
+            private authService: AuthService,
             private router: Router
       ) { }
 
       ngOnInit(): void {
+            this.isAdmin = this.authService.getUser()?.role == 'ADMIN';
+            
             this.sub = this.menuService.getHighlight().subscribe({
                   next: (result) => {
                         this.isLoad = false;
