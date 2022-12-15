@@ -1,27 +1,24 @@
-# MiniProject
+# BEEF!
+
+![](https://github.com/zettacamp-choirul-annam/mini-project/blob/main/preview.png)
+
+This application is a food ordering application at BEEF! restorant which is done online through a website platform. The application is used to make it easier for customers to see information about the menu available at the restaurant or customers can also order food online. Customers can place an order by first registering an account and then logging into this website, then customers can see and select the available menu, then they can place an order and pay for it. This application also makes it easier for restaurants to provide information about food menus or discount offers and also the featured menu of the restaurant.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.5.
 
-## Development server
+## How to run this project
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+``` bash
+# install dependencies
+$ npm install
+```
 
-## Code scaffolding
+``` bash
+# run dev server
+$ npm run start
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+``` bash
+# build project
+$ npm run build
+```
