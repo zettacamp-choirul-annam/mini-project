@@ -278,7 +278,7 @@ export class MenuService {
       delete(id: string) {
             const query = `
                   mutation ($id: ID!) {
-                        deleteIngredient(_id: $id) { _id }
+                        deleteRecipe(_id: $id) { _id }
                   }`;
 
             const response = this.apollo.mutate({
@@ -287,7 +287,7 @@ export class MenuService {
             });
 
             return response.pipe(
-                  map((result: any) => result.data.deleteIngredient)
+                  map((result: any) => result.data.deleteRecipe)
             );
       }
 }
