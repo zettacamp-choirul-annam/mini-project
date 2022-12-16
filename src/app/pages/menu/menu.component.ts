@@ -63,12 +63,10 @@ export class MenuComponent implements OnInit {
                         if (this.menus.length == 0) this.isEmpty = true;
                   },
                   error: (error) => {
-                        // const code = error.graphQLErrors[0]?.extensions?.code;
+                        const code = error.graphQLErrors[0]?.extensions?.code;
 
-                        // this.isEmpty = code == 'recipe/recipe-not-found';
-                        // this.isError = code == undefined;
-                        this.isEmpty = error.message == 'Cart not found';
-                        this.isError = error.message != 'Cart not found';
+                        this.isEmpty = code == 'recipe/recipe-not-found';
+                        this.isError = code == undefined;
                         
                         this.isLoad  = false;
 
